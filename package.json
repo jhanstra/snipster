@@ -4,5 +4,16 @@
   "description": "A snippets manager for hipsters",
   "main": "index.js",
   "author": "jared hanstra",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "co": "^4.6.0",
+    "co-prompt": "^1.0.0",
+    "commander": "^2.9.0",
+    "lodash": "^4.17.4",
+    "prompt": "^1.0.0"
+  },
+  "bin": {
+    "snipster": "./index.js"
+  }
 }
