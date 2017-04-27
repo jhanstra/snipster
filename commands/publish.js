@@ -22,7 +22,6 @@ const getSnippetsFromDirectory = (dir) => {
       results.push(file)
     }
   });
-  console.log(results)
   return results;
 };
 
@@ -57,7 +56,6 @@ const addSnippetsToAtom = () => {
     }
   }
   fs.writeFileSync(os.homedir() + '/.atom/snippets.cson', cson.stringify(atomSnippetMap, null, 2))
-  console.log(cson.stringify(atomSnippetMap, null, 2))
 }
 
 const addSnippetsToVSCode = () => {
@@ -74,7 +72,6 @@ const addSnippetsToVSCode = () => {
       fs.writeFileSync(os.homedir() + '/Library/Application\ Support/Code/User/snippets/' + languageName + '.json', JSON.stringify(vscodeSnippetMap[language], null, 2))
     }
   }
-  console.log(JSON.stringify(vscodeSnippetMap, null, 2))
 }
 
 const publish = () => {
@@ -94,7 +91,6 @@ const publish = () => {
       })
       addSnippetsToAtom()
       addSnippetsToVSCode()
-      console.log(JSON.stringify(snippetMap, null, 2))
     })
 }
 
