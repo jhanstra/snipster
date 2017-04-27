@@ -36,11 +36,13 @@ write snippets as you would normally write code - don't worry about shoving it i
 2. the file extension of your snippet file is the language scope under which the snippet can be used. get fancy with multiple scopes like 'html+md+txt' to use the snippet is several scopes. use shortcut extensions like 'all' or 'style' to use the snippet in all file types or all similar style file types (css, less, scss).
 3. the content of the file is the snippet body, exactly what will appear when you type the prefix and tab. use placeholders ($1{placeholder}) just like normal.
 
-## install
+## install & set-up
 ```
 yarn global add snipster
 -- or --
 npm install -g snipster
+
+snipster init
 ```
 
 
@@ -80,6 +82,10 @@ coming soon
 - less naive assumptions about editor installations, e.g. account for users who use homebrew to install editors
 - test that snipster works on pc
 - write automated tests
+- add support for sublime
+- add support for brackets
+- add support for textmate
+
 
 ## donate
 if you find value in snipster please feel free to [buy me a coffee](https://www.paypal.me/jhanstra/4) :)
