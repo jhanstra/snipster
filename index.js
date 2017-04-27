@@ -9,6 +9,7 @@ const _ = require('lodash')
 const fs = require('fs')
 const util = require('util')
 const os = require('os')
+const cson = require('cson')
 
 prompt.message = ''
 
@@ -32,8 +33,164 @@ const getAllSnippets = (dir) => {
   return results;
 };
 
-const addSnippetToCode = (snippet) => {
+const getLanguageFileNameForVSCode = (language) => {
+  switch(language) {
+    case (''):
+      return 'plaintext'
+    case ('clj' || 'cljs' || 'cljc' || 'edn' ):
+      return 'clojure'
+    case ('coffee' || 'coffeelit'):
+      return 'coffeescript'
+    case ('cs'):
+      return 'csharp'
+    case ('cc'):
+      return 'cpp'
+    case ('f#' || 'fs' || 'fsi' || 'ml' || 'mli' || 'fsx' || 'fsscript'):
+      return 'fsharp'
+    case ('git' || 'gitcommit' || 'gitrebase'):
+      return 'git-commit'
+    case ('hbs'):
+      return 'handlebars'
+    case ('js' || 'javascript'):
+      return 'javascript'
+    case ('jsx' || 'react'):
+      return 'javascriptreact'
+    case ('make'):
+      return 'makefile'
+    case ('md' || 'markdown' || 'gfm' || 'mark' || 'mkdown' || 'mdml' || 'mdown' || 'mdtext'):
+      return 'markdown'
+    case ('m' || 'h' || 'objc' || 'objective-c' || 'objectivec' || 'oc'):
+      return 'objective-c'
+    case ('ps1' || 'ps' || 'pwrshell'):
+      return 'powershell'
+    case ('cshtml' || 'vbhtml'):
+      return 'razor'
+    case ('rb' || 'so' || 'ror' || 'rubyonrails'):
+      return 'ruby'
+    case ('sass' || 'scss'):
+      return 'scss'
+    case ('sh' || 'bash' || 'shell'):
+      return 'shellscript'
+    case ('ts'):
+      return 'typescript'
+    case ('yml'):
+      return 'yaml'
+    default:
+      return language
+  }
+}
 
+const getLanguageScopeForAtom = (language) => {
+  switch(language) {
+    case (''):
+      return '.text.plain'
+    case ('clj' || 'cljs' || 'cljc' || 'edn' ):
+      return '.source.clojure'
+    case ('coffee' || 'coffeelit'):
+      return '.source.coffee'
+    case ('cs', 'csharp'):
+      return '.source.cs'
+    case ('css'):
+      return '.source.css'
+    case ('cc' || 'cpp'):
+      return '.source.cpp'
+    case ('f#' || 'fs' || 'fsi' || 'ml' || 'mli' || 'fsx' || 'fsscript'):
+      return '.source.fs'
+    case ('git' || 'gitcommit' || 'gitrebase'):
+      return '.text.git-commit'
+    case ('handlebars' || 'hbs'):
+      return '.source.hbs'
+    case ('html'):
+      return '.text.html'
+    case ('js' || 'javascript'):
+      return '.source.js'
+    case ('jsx' || 'react'):
+      return '.source.jsx'
+    case ('less'):
+      return '.source.css.less'
+    case ('make'):
+      return '.source.makefile'
+    case ('md' || 'markdown' || 'gfm' || 'mark' || 'mkdown' || 'mdml' || 'mdown' || 'mdtext'):
+      return '.source.gfm'
+    case ('mustache'):
+      return '.text.html.mustache'
+    case ('m' || 'h' || 'objc' || 'objective-c' || 'objectivec' || 'oc'):
+      return '.source.objc'
+    case ('php'):
+      return '.text.html.php'
+    case ('ps1' || 'ps' || 'pwrshell'):
+      return '.source.powershell'
+    case ('cshtml' || 'vbhtml'):
+      return '.source.razor'
+    case ('rb' || 'so'):
+      return '.source.html.erb'
+    case ('ror' || 'rubyonrails'):
+      return '.text.html.ruby'
+    case ('sass' || 'scss'):
+      return '.source.scss'
+    case ('sh' || 'bash' || 'shell'):
+      return '.source.shell'
+    case ('ts'):
+      return '.source.ts, .source.tsx'
+    case ('xml'):
+      return '.text.xml'
+    case ('yml'):
+      return '.source.yaml'
+    default:
+      return '.source.' + language
+  }
+}
+
+let snippetMap = {}
+const addSnippetToMap = ({language, prefix, body}) => {
+  const languages = language.replace('style', 'css+scss+less').split('+')
+  languages.map(language => {
+    language = language.toLowerCase()
+    if (snippetMap.hasOwnProperty(language)) {
+      snippetMap[language][prefix] = {
+        prefix: prefix,
+        body: body
+      }
+    } else {
+      snippetMap[language] = {}
+      snippetMap[language][prefix] = {
+        prefix: prefix,
+        body: body
+      }
+    }
+  })
+}
+
+const addSnippetsToVSCode = (snippetMap) => {
+  for(let language in snippetMap) {
+    if (snippetMap.hasOwnProperty(language)) {
+      const languageSnippets = snippetMap[language]
+      const languageName = getLanguageFileNameForVSCode(language)
+      for (let snippet in languageSnippets) {
+        if (languageSnippets.hasOwnProperty(snippet)) {
+          languageSnippets[snippet].body = languageSnippets[snippet].body.split('\n')
+        }
+      }
+      fs.writeFile(os.homedir() + '/Library/Application Support/Code/User/snippets/' + languageName + '.json', JSON.stringify(languageSnippets, null, 2), (err) => {
+        console.log(chalk.red(err))
+      })
+    }
+  }
+}
+
+const addSnippetsToAtom = (snippetMap) => {
+  for (let language in snippetMap) {
+    if (snippetMap.hasOwnProperty(language)) {
+      const languageSnippets = snippetMap[language]
+      const languageScope = getLanguageScopeForAtom(language)
+      snippetMap[languageScope] = languageSnippets
+      delete snippetMap[language]
+    }
+  }
+  fs.writeFile(os.homedir() + '/.atom/snippets.cson', cson.stringify(snippetMap, null, 2), (err) => {
+    console.log(chalk.red(err))
+  })
+  
 }
 
 
@@ -50,14 +207,15 @@ snipster
 
       snippets.map(s => {
         const snippet = {
-          snippetType: s.substring(s.lastIndexOf('.') + 1)
-          snippetName: s.substring(s.lastIndexOf('/') + 1, s.lastIndexOf('.'))
-          snippetBody: fs.readFileSync(s, { encoding: 'utf-8'})
+          language: s.substring(s.lastIndexOf('.') + 1),
+          prefix: s.substring(s.lastIndexOf('/') + 1, s.lastIndexOf('.')),
+          body: fs.readFileSync(s, { encoding: 'utf-8'})
         }
-        addSnippetToCode(snippet);
-        
-        
+        addSnippetToMap(snippet);
       })
+      addSnippetsToAtom(snippetMap)
+      addSnippetsToVSCode(snippetMap)
+      console.log(JSON.stringify(snippetMap, null, 2))
     })
     
   })
