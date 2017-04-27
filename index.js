@@ -10,7 +10,7 @@ snipster.version('0.0.1')
 
 snipster
   .command('list')
-  .description('list all snippets')
+  .description("list all snippets in user's snippets directory")
   .action((req, optional) => {
   })
 

@@ -1,7 +1,5 @@
 const getLanguageFileNameForVSCode = (language) => {
   switch(language) {
-    case (''):
-      return 'plaintext'
     case ('clj' || 'cljs' || 'cljc' || 'edn' ):
       return 'clojure'
     case ('coffee' || 'coffeelit'):

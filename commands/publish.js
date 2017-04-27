@@ -7,6 +7,8 @@ const getLanguageScopeForAtom = require('../utils/atom-match')
 const getLanguageFileNameForVSCode = require('../utils/code-match')
 
 let snippetMap = {}
+let atomSnippetMap = {}
+let vscodeSnippetMap = {}
 
 const getSnippetsFromDirectory = (dir) => {
   let results = [];
@@ -20,11 +22,15 @@ const getSnippetsFromDirectory = (dir) => {
       results.push(file)
     }
   });
+  console.log(results)
   return results;
 };
 
 const addSnippetToMap = ({language, prefix, body}) => {
-  const languages = language.replace('style', 'css+scss+less').split('+')
+  const languages = language
+    .replace('style', 'css+scss+less')
+    .replace('all', 'c+clj+coffee+cs+cc+css+fs+git+go+groovy+hbs+html+jade+java+js+jsx+json+less+liquid+lua+make+md+objc+pl+php+plain+python+ps1+r+cshtml+rb+rust+scss+sh+sql+swift+toml+ts+vb+xml+xsl+yaml')
+    .split('+')
   languages.map(language => {
     language = language.toLowerCase()
     if (snippetMap.hasOwnProperty(language)) {
@@ -42,31 +48,33 @@ const addSnippetToMap = ({language, prefix, body}) => {
   })
 }
 
-const addSnippetsToAtom = (snippetMap) => {
+const addSnippetsToAtom = () => {
   for (let language in snippetMap) {
     if (snippetMap.hasOwnProperty(language)) {
       const languageSnippets = snippetMap[language]
       const languageScope = getLanguageScopeForAtom(language)
-      snippetMap[languageScope] = languageSnippets
-      delete snippetMap[language]
+      atomSnippetMap[languageScope] = languageSnippets
     }
   }
-  fs.writeFile(os.homedir() + '/.atom/snippets.cson', cson.stringify(snippetMap, null, 2))
+  fs.writeFileSync(os.homedir() + '/.atom/snippets.cson', cson.stringify(atomSnippetMap, null, 2))
+  console.log(cson.stringify(atomSnippetMap, null, 2))
 }
 
-const addSnippetsToVSCode = (snippetMap) => {
+const addSnippetsToVSCode = () => {
   for(let language in snippetMap) {
     if (snippetMap.hasOwnProperty(language)) {
       const languageSnippets = snippetMap[language]
-      const languageName = getLanguageFileNameForVSCode(language)
-      for (let snippet in languageSnippets) {
-        if (languageSnippets.hasOwnProperty(snippet)) {
-          languageSnippets[snippet].body = languageSnippets[snippet].body.split('\n')
+      vscodeSnippetMap[language] = languageSnippets
+      for (let snippet in vscodeSnippetMap[language]) {
+        if (vscodeSnippetMap[language].hasOwnProperty(snippet)) {
+          vscodeSnippetMap[language][snippet].body = vscodeSnippetMap[language][snippet].body.split('\n')
         }
       }
-      fs.writeFile(os.homedir() + '/Library/Application Support/Code/User/snippets/' + languageName + '.json', JSON.stringify(languageSnippets, null, 2))
+      const languageName = getLanguageFileNameForVSCode(language)
+      fs.writeFileSync(os.homedir() + '/Library/Application\ Support/Code/User/snippets/' + languageName + '.json', JSON.stringify(vscodeSnippetMap[language], null, 2))
     }
   }
+  console.log(JSON.stringify(vscodeSnippetMap, null, 2))
 }
 
 const publish = () => {
@@ -84,8 +92,9 @@ const publish = () => {
         }
         addSnippetToMap(snippet);
       })
-      addSnippetsToAtom(snippetMap)
-      addSnippetsToVSCode(snippetMap)
+      addSnippetsToAtom()
+      addSnippetsToVSCode()
+      console.log(JSON.stringify(snippetMap, null, 2))
     })
 }
 

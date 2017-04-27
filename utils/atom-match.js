@@ -1,7 +1,7 @@
 const getLanguageScopeForAtom = (language) => {
   switch(language) {
-    case (''):
-      return '.text.plain'
+    case ('all'):
+      return '.text, .source'
     case ('clj' || 'cljs' || 'cljc' || 'edn' ):
       return '.source.clojure'
     case ('coffee' || 'coffeelit'):
@@ -36,6 +36,8 @@ const getLanguageScopeForAtom = (language) => {
       return '.source.objc'
     case ('php'):
       return '.text.html.php'
+    case ('pl'):
+      return '.source.perl'
     case ('ps1' || 'ps' || 'pwrshell'):
       return '.source.powershell'
     case ('cshtml' || 'vbhtml'):
