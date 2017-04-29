@@ -17,8 +17,8 @@ snipster
   })
 
 snipster
-  .command('publish')
-  .description('publish snippets to editors')
+  .command('publish [editor]')
+  .description('publish snippets to all editors [or choose which editors to publish to]')
   .action((req, optional) => {
     publish()
   })

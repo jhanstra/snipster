@@ -12,7 +12,6 @@ const list = () => {
     let snippets = getSnippetsFromDirectory(userSettings.directory)
     let desiredScope = process.argv.slice(3)
     let snippetList = {}
-    console.log(desiredScope)
     if (desiredScope.length != 0) {
       desiredScope.map(scope => {
         snippets.map(s => {
@@ -23,7 +22,6 @@ const list = () => {
         })
       })
     } else {
-      console.log('yup')
       snippets.map(s => {
         snippetList[s.substring(s.lastIndexOf('/') + 1, s.lastIndexOf('.'))] = s.substring(s.lastIndexOf('.') + 1)
       })

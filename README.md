@@ -75,8 +75,6 @@ coming soon
 ## todo
 - warn user that they will lose snippets from their editor before publishing
 - snipster add - add a snippet to your directory from the command line. copypaste the contents in or supply a gist url or github repo for bulk adding
-- snipster publish - add options to publish only to certain editors
-- snipster list - list all snippets in your directory
 - snipster init - move pre-existing snippets from editors into new or provided snippets directory
 - snipster help - get information about how to use snipster
 - less naive assumptions about editor installations, e.g. account for users who use homebrew to install editors

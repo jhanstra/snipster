@@ -2,6 +2,7 @@ const fs = require('fs')
 const os = require('os')
 const chalk = require('chalk')
 const cson = require('cson')
+const _ = require('lodash')
 
 const getLanguageScopeForAtom = require('../utils/atom-match')
 const getLanguageFileNameForVSCode = require('../utils/code-match')
@@ -9,7 +10,6 @@ const getSnippetsFromDirectory = require('../utils/get-snippets')
 
 let snippetMap = {}
 let atomSnippetMap = {}
-let vscodeSnippetMap = {}
 
 const addSnippetToMap = ({language, prefix, body}) => {
   const languages = language
@@ -34,20 +34,23 @@ const addSnippetToMap = ({language, prefix, body}) => {
 }
 
 const addSnippetsToAtom = () => {
-  for (let language in snippetMap) {
-    if (snippetMap.hasOwnProperty(language)) {
-      const languageSnippets = snippetMap[language]
-      const languageScope = getLanguageScopeForAtom(language)
+  let atomSnippetMap = _.cloneDeep(snippetMap)
+  for (let language in atomSnippetMap) {
+    if (atomSnippetMap.hasOwnProperty(language)) {
+      let languageSnippets = atomSnippetMap[language]
+      let languageScope = getLanguageScopeForAtom(language)
       atomSnippetMap[languageScope] = languageSnippets
     }
   }
   fs.writeFileSync(os.homedir() + '/.atom/snippets.cson', cson.stringify(atomSnippetMap, null, 2))
 }
 
+
 const addSnippetsToVSCode = () => {
-  for(let language in snippetMap) {
-    if (snippetMap.hasOwnProperty(language)) {
-      const languageSnippets = snippetMap[language]
+  let vscodeSnippetMap = _.cloneDeep(snippetMap);
+  for(let language in vscodeSnippetMap) {
+    if (vscodeSnippetMap.hasOwnProperty(language)) {
+      let languageSnippets = vscodeSnippetMap[language]
       vscodeSnippetMap[language] = languageSnippets
       for (let snippet in vscodeSnippetMap[language]) {
         if (vscodeSnippetMap[language].hasOwnProperty(snippet)) {
@@ -57,6 +60,18 @@ const addSnippetsToVSCode = () => {
       const languageName = getLanguageFileNameForVSCode(language)
       fs.writeFileSync(os.homedir() + '/Library/Application\ Support/Code/User/snippets/' + languageName + '.json', JSON.stringify(vscodeSnippetMap[language], null, 2))
     }
+  }
+}
+
+const addSnippetsToEditor = (editor) => {
+  editor = editor.toLowerCase()
+  switch (editor) {
+    case ('atom' || 'a' || 'atm'):
+      addSnippetsToAtom()
+      break
+    case ('vscode' || 'vs code' || 'code' || 'vs-code' || 'vsc' || 'v' || 'c'):
+      addSnippetsToVSCode()
+      break
   }
 }
 
@@ -75,8 +90,24 @@ const publish = () => {
       }
       addSnippetToMap(snippet);
     })
-    addSnippetsToAtom()
-    addSnippetsToVSCode()
+
+    /* Handle user-specified editors in command line options */
+    let desiredEditors = process.argv.slice(3)
+    if (desiredEditors.length != 0) {
+      desiredEditors.map(editor => {
+        addSnippetsToEditor(editor) 
+      })
+    } 
+    /* Else use the editors listed in user's .snipster file */
+    else {
+      fs.readFile(os.homedir() + '/.snipster', (err, data) => {
+        if (err) {return console.log(chalk.red(err)) }
+        else { userSettings = JSON.parse(data) }
+        userSettings.editors.map(editor => {
+          addSnippetsToEditor(editor)
+        })
+      })
+    }
   })
 }
 
