@@ -5,13 +5,15 @@ const snipster = require('commander')
 
 const init = require('./commands/init')
 const publish = require('./commands/publish')
+const list = require('./commands/list')
 
 snipster.version('0.0.1')
 
 snipster
-  .command('list')
-  .description("list all snippets in user's snippets directory")
+  .command('list [scope]')
+  .description("list all snippets in user's snippets directory [or filter by language scope]")
   .action((req, optional) => {
+    list()
   })
 
 snipster

@@ -5,25 +5,11 @@ const cson = require('cson')
 
 const getLanguageScopeForAtom = require('../utils/atom-match')
 const getLanguageFileNameForVSCode = require('../utils/code-match')
+const getSnippetsFromDirectory = require('../utils/get-snippets')
 
 let snippetMap = {}
 let atomSnippetMap = {}
 let vscodeSnippetMap = {}
-
-const getSnippetsFromDirectory = (dir) => {
-  let results = [];
-  fs.readdirSync(dir).map(file => {
-    file = dir + '/' + file
-    let stat = fs.statSync(file)
-    if (stat && stat.isDirectory()) {
-      results = results.concat(getSnippetsFromDirectory(file))
-    } 
-    else {
-      results.push(file)
-    }
-  });
-  return results;
-};
 
 const addSnippetToMap = ({language, prefix, body}) => {
   const languages = language
@@ -76,22 +62,22 @@ const addSnippetsToVSCode = () => {
 
 const publish = () => {
   let userSettings = {}
-    fs.readFile(os.homedir() + '/.snipster', (err, data) => {
-      if (err) {return console.log(chalk.red(err)) }
-      else { userSettings = JSON.parse(data) }
-      let snippets = getSnippetsFromDirectory(userSettings.directory)
+  fs.readFile(os.homedir() + '/.snipster', (err, data) => {
+    if (err) {return console.log(chalk.red(err)) }
+    else { userSettings = JSON.parse(data) }
+    let snippets = getSnippetsFromDirectory(userSettings.directory)
 
-      snippets.map(s => {
-        const snippet = {
-          language: s.substring(s.lastIndexOf('.') + 1),
-          prefix: s.substring(s.lastIndexOf('/') + 1, s.lastIndexOf('.')),
-          body: fs.readFileSync(s, { encoding: 'utf-8'})
-        }
-        addSnippetToMap(snippet);
-      })
-      addSnippetsToAtom()
-      addSnippetsToVSCode()
+    snippets.map(s => {
+      const snippet = {
+        language: s.substring(s.lastIndexOf('.') + 1),
+        prefix: s.substring(s.lastIndexOf('/') + 1, s.lastIndexOf('.')),
+        body: fs.readFileSync(s, { encoding: 'utf-8'})
+      }
+      addSnippetToMap(snippet);
     })
+    addSnippetsToAtom()
+    addSnippetsToVSCode()
+  })
 }
 
 module.exports = publish
