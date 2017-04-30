@@ -1,7 +1,9 @@
 # snipster
 🤓 🚴‍♀️ ☕ **a snippets manager for hipsters** ☕ 🚴‍ 🤓
 
-snipster manages snippets across all of your text editors and allows you to write and arrange snippets intuitively *by file*, rather than by tediously hand-editing 1000-line json/cson/xml files
+**snipster publishes all of your snippets to all of your editors with one command**
+
+write and arrange snippets *by file*, rather than tediously hand-editing 1000-line json/cson/xml files.
 
 ## install & set-up
 ```
@@ -22,10 +24,10 @@ write snippets as you would normally write code - don't worry about wrangling th
 ## example
 **vs code**
 ```
-"Hipster Ipum": {
-  "prefix": "hipster",
+"Hipster Ipsum": {
+  "prefix": "hipsum",
   "body": [
-    "Tilde beard sriracha, ennui 8-bit jianbing umami. Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse. Tumblr farm-to-table artisan butcher aesthetic, umami organic forage distillery microdosing four loko whatever truffaut master cleanse. La croix williamsburg next level tumblr, cliche literally semiotics. Paleo kombucha bushwick ethical occupy. VHS vice literally hella lumbersexual. Locavore health goth cardigan, selfies iceland edison bulb sriracha cred."
+    "Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse."
   ],
   "description": "Hipster-flavored filler text"
 },
@@ -36,16 +38,14 @@ write snippets as you would normally write code - don't worry about wrangling th
 ```
 '.source.gfm':
   'hipster':
-    prefix: "hipster"
-    body: "Tilde beard sriracha, ennui 8-bit jianbing umami. Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse. Tumblr farm-to-table artisan butcher aesthetic, umami organic forage distillery microdosing four loko whatever truffaut master cleanse. La croix williamsburg next level tumblr, cliche literally semiotics. Paleo kombucha bushwick ethical occupy. VHS vice literally hella lumbersexual. Locavore health goth cardigan, selfies iceland edison bulb sriracha cred."": "Hipster-flavored filler text"
+    prefix: "hipsum"
+    body: "Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse."
   ... all of your other snippets ...
 ```
 
-**snipster**
+**snipster (hipsum.md)**
 ```
-# hipster.md
-
-Tilde beard sriracha, ennui 8-bit jianbing umami. Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse. Tumblr farm-to-table artisan butcher aesthetic, umami organic forage distillery microdosing four loko whatever truffaut master cleanse. La croix williamsburg next level tumblr, cliche literally semiotics. Paleo kombucha bushwick ethical occupy. VHS vice literally hella lumbersexual. Locavore health goth cardigan, selfies iceland edison bulb sriracha cred.
+Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse.
 ```
 
 
