@@ -6,14 +6,15 @@ const snipster = require('commander')
 const init = require('./commands/init')
 const publish = require('./commands/publish')
 const list = require('./commands/list')
+const help = require('./commands/help')
 
 snipster.version('0.0.1')
 
 snipster
-  .command('list [scope]')
-  .description("list all snippets in user's snippets directory [or filter by language scope]")
+  .command('init')
+  .description('set up snipster with your editors and snippets directory')
   .action((req, optional) => {
-    list()
+    init()
   })
 
 snipster
@@ -24,10 +25,17 @@ snipster
   })
 
 snipster
-  .command('init')
-  .description('set up snipster with your editors and snippets directory')
+  .command('list [scope]')
+  .description("list all snippets in user's snippets directory [or filter by language scope]")
   .action((req, optional) => {
-    init()
+    list()
+  })
+
+snipster
+  .command('help')
+  .description('provide help with snipster')
+  .action((req, optional) => {
+    help()
   })
 
 snipster.parse(process.argv); 

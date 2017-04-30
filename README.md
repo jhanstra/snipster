@@ -29,13 +29,6 @@ for (var ${index} = 0; ${index} < ${array}.length; ${index}++) {
 }
 ```
 
-## how it works
-write snippets as you would normally write code - don't worry about shoving it into a json or cson object, quoting every single line, escaping tabs and new lines, indenting, etc. leave all of that complexity for snipster.
-
-1. the name of your snippet file is the prefix you use to call it.
-2. the file extension of your snippet file is the language scope under which the snippet can be used. get fancy with multiple scopes like 'html+md+txt' to use the snippet is several scopes. use shortcut extensions like 'all' or 'style' to use the snippet in all file types or all similar style file types (css, less, scss).
-3. the content of the file is the snippet body, exactly what will appear when you type the prefix and tab. use placeholders ($1{placeholder}) just like normal.
-
 ## install & set-up
 ```
 yarn global add snipster
@@ -45,38 +38,35 @@ npm install -g snipster
 snipster init
 ```
 
+## how it works
+write snippets as you would normally write code - don't worry about shoving it into a json or cson object, quoting every single line, escaping tabs and new lines, indenting, etc. leave all of that complexity for snipster.
+
+1. the name of your snippet file is the prefix you use to call it.
+2. the file extension of your snippet file is the language scope under which the snippet can be used. get fancy with multiple scopes like 'html+md+txt' to use the snippet is several scopes. use shortcut extensions like 'all' or 'style' to use the snippet in all file types or all similar style file types (css, less, scss).
+3. the content of the file is the snippet body, exactly what will appear when you type the prefix and tab. use placeholders ($1{placeholder}) just like normal.
+
 
 ## api
-```
-snipster init
-```
-get set up with snipster by telling it where your snippets are and which text editors you use.
+- `snipster init`
+  - get set up with snipster by telling it where your snippets are and which text editors you use.
 
-```
-snipster publish
-```
-publish all of the snippets in your directory to your text editors (currently vscode and atom are supported). after running this, you should be able to use all of your snippets across either editor.
+- `snipster publish`
+  - publish all of the snippets in your directory to your text editors (currently vscode and atom are supported). after running this, you should be able to use all of your snippets across either editor. by default, snipster will publish to all of the editors you provide during `snipster init`. if you wish to publish only to specific editors, pass them as options, e.g. `snipster publish atom` or `snipster publish code`
 
-```
-snipster list
-```
-coming soon
+- `snipster list`
+  - list all of the snippets in your directory, or filter by language scope, e.g. `snipster list js` or `snipster list md`
 
-```
-snipster add
-```
-coming soon
+- `snipster add`
+  - coming soon
 
-```
-snipster help
-```
-coming soon
+- `snipster help`
+  - alias for `snipster --help`. provides details on how to use snipster.
+
 
 ## todo
 - warn user that they will lose snippets from their editor before publishing
 - snipster add - add a snippet to your directory from the command line. copypaste the contents in or supply a gist url or github repo for bulk adding
 - snipster init - move pre-existing snippets from editors into new or provided snippets directory
-- snipster help - get information about how to use snipster
 - less naive assumptions about editor installations, e.g. account for users who use homebrew to install editors
 - test that snipster works on pc
 - write automated tests
