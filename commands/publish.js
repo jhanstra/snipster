@@ -97,6 +97,7 @@ const publish = () => {
       desiredEditors.map(editor => {
         addSnippetsToEditor(editor) 
       })
+      console.log(chalk.green('🎉 Successfully published your snippets to these editors: ' + desiredEditors.join(', ') + ' 🎉'))
     } 
     /* Else use the editors listed in user's .snipster file */
     else {
@@ -105,7 +106,9 @@ const publish = () => {
         else { userSettings = JSON.parse(data) }
         userSettings.editors.map(editor => {
           addSnippetsToEditor(editor)
+          
         })
+        console.log(chalk.green('🎉  Successfully published your snippets to these editors: ' + userSettings.editors.join(', ') + ' 🎉'))
       })
     }
   })
