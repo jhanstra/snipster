@@ -1,7 +1,7 @@
 # snipster
-🤓 🚴‍♀️ ☕ **a snippets manager for hipsters** ☕ 🚴‍♂ 🤓
+🤓 🚴‍♀️ ☕ **a snippets manager for hipsters** ☕ 🚴‍ 🤓
 
-snipster manages snippets across your text editors and allows you to write and arrange snippets *by file* in a centralized directory, rather than by hand-editing 1000-line json or cson or xml files.
+snipster manages snippets across all of your text editors and allows you to write and arrange snippets intuitively *by file*, rather than by tediously hand-editing 1000-line json/cson/xml files
 
 ## install & set-up
 ```
@@ -13,11 +13,11 @@ snipster init
 ```
 
 ## how it works
-write snippets as you would normally write code - don't worry about shoving it into a json or cson object, quoting every single line, escaping tabs and new lines, indenting, etc. leave all of that complexity for snipster.
+write snippets as you would normally write code - don't worry about wrangling them into a json or cson object, quoting every single line, escaping tabs and new lines, indenting, etc. leave all of that complexity for snipster.
 
 1. the name of your snippet file is the prefix you use to call it.
-2. the file extension of your snippet file is the language scope under which the snippet can be used. get fancy with multiple scopes like 'html+md+txt' to use the snippet is several scopes. use shortcut extensions like 'all' or 'style' to use the snippet in all file types or all similar style file types (css, less, scss).
-3. the content of the file is the snippet body, exactly what will appear when you type the prefix and tab. use placeholders ($1{placeholder}) just like normal.
+2. the file extension of your snippet file is the language scope under which the snippet can be used. get fancy with multi-scope extensions like 'html+md+txt' that will make the snippet available to all scopes, or use shortcut extensions like 'all' or 'style' to use the snippet in *all* file types or all similar *style* file types (css, less, scss), respectively.
+3. the content of the file is the snippet body, exactly what will appear when you type the prefix and tab. use tab stop fields ($1, $2) and placeholders ($1{placeholder}) just like you would normally.
 
 ## example
 **vs code**
@@ -34,7 +34,7 @@ write snippets as you would normally write code - don't worry about shoving it i
 
 **atom**
 ```
-'.source.gfm:
+'.source.gfm':
   'hipster':
     prefix: "hipster"
     body: "Tilde beard sriracha, ennui 8-bit jianbing umami. Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse. Tumblr farm-to-table artisan butcher aesthetic, umami organic forage distillery microdosing four loko whatever truffaut master cleanse. La croix williamsburg next level tumblr, cliche literally semiotics. Paleo kombucha bushwick ethical occupy. VHS vice literally hella lumbersexual. Locavore health goth cardigan, selfies iceland edison bulb sriracha cred."": "Hipster-flavored filler text"
