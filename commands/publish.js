@@ -45,12 +45,18 @@ const addSnippetsToAtom = () => {
     }
   }
   let output = atomSnipsterComment() + '\n' + cson.stringify(atomSnippetMap, null, 2)
-  fs.writeFileSync(os.homedir() + '/.atom/snippets.cson', output)
-  console.log(chalk.green('🎉 Successfully published your snippets to Atom 🎉'))
+  fs.writeFile(os.homedir() + '/.atom/snippets.cson', output, (err) => {
+    if (err) { console.log(chalk.red("Your Atom snippet file doesn't exist where Snipster expected to find it. Please check that you have Atom installed.\nIf you feel there is an error, please submit an issue to ") + chalk.yellow('https://github.com/jhanstra/snipster/issues.'))}
+    else {
+      console.log(chalk.green('🎉 Successfully published your snippets to Atom 🎉'))
+    }
+    
+  })
 }
 
 
 const addSnippetsToVSCode = () => {
+  let failedToPublish = false
   let vscodeSnippetMap = _.cloneDeep(snippetMap);
   for(let language in vscodeSnippetMap) {
     if (vscodeSnippetMap.hasOwnProperty(language)) {
@@ -63,10 +69,18 @@ const addSnippetsToVSCode = () => {
       }
       const languageName = getLanguageFileNameForVSCode(language)
       let output = vscodeSnipsterComment() + '\n' + JSON.stringify(vscodeSnippetMap[language], null, 2)
-      fs.writeFileSync(os.homedir() + '/Library/Application\ Support/Code/User/snippets/' + languageName + '.json', output)
+      try {
+        fs.writeFileSync(os.homedir() + '/Library/Application\ Support/Code/User/snippetsz/' + languageName + '.json', output)
+      } catch (e) {
+        failedToPublish = true
+      }
     }
   }
-  console.log(chalk.green('🎉 Successfully published your snippets to VSCode 🎉'))
+  if (failedToPublish) {
+    console.log(chalk.red("Your VSCode snippet files do not exist where Snipster expected to find them. Please check that you have VSCode installed.\nIf you feel there is an error, please submit an issue to ") + chalk.yellow('https://github.com/jhanstra/snipster/issues.'))
+  } else {
+    console.log(chalk.green('🎉 Successfully published your snippets to VSCode 🎉'))
+  }
 }
 
 const addSnippetsToEditor = (editor) => {
