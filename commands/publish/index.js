@@ -4,11 +4,11 @@ const chalk = require('chalk')
 const cson = require('cson')
 const _ = require('lodash')
 
-const getLanguageScopeForAtom = require('../utils/atom-match')
-const getLanguageFileNameForVSCode = require('../utils/vscode-match')
-const getSnippetsFromDirectory = require('../utils/get-snippets')
-const atomSnipsterComment = require('../utils/atom-comment')
-const vscodeSnipsterComment = require('../utils/vscode-comment')
+const getLanguageScopeForAtom = require('../../utils/atom-match')
+const getLanguageFileNameForVSCode = require('../../utils/vscode-match')
+const getSnippetsFromDirectory = require('../../utils/get-snippets')
+const atomSnipsterComment = require('../../utils/atom-comment')
+const vscodeSnipsterComment = require('../../utils/vscode-comment')
 
 let snippetMap = {}
 let atomSnippetMap = {}
@@ -70,7 +70,7 @@ const addSnippetsToVSCode = () => {
       const languageName = getLanguageFileNameForVSCode(language)
       let output = vscodeSnipsterComment() + '\n' + JSON.stringify(vscodeSnippetMap[language], null, 2)
       try {
-        fs.writeFileSync(os.homedir() + '/Library/Application\ Support/Code/User/snippetsz/' + languageName + '.json', output)
+        fs.writeFileSync(os.homedir() + '/Library/Application\ Support/Code/User/snippets/' + languageName + '.json', output)
       } catch (e) {
         failedToPublish = true
       }

@@ -2,7 +2,7 @@ const fs = require('fs')
 const os = require('os')
 const columnify = require('columnify')
 
-const getSnippetsFromDirectory = require('../utils/get-snippets')
+const getSnippetsFromDirectory = require('../../utils/get-snippets')
 
 const list = () => {
   let userSettings = {}
