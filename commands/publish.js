@@ -5,8 +5,10 @@ const cson = require('cson')
 const _ = require('lodash')
 
 const getLanguageScopeForAtom = require('../utils/atom-match')
-const getLanguageFileNameForVSCode = require('../utils/code-match')
+const getLanguageFileNameForVSCode = require('../utils/vscode-match')
 const getSnippetsFromDirectory = require('../utils/get-snippets')
+const atomSnipsterComment = require('../utils/atom-comment')
+const vscodeSnipsterComment = require('../utils/vscode-comment')
 
 let snippetMap = {}
 let atomSnippetMap = {}
@@ -34,15 +36,17 @@ const addSnippetToMap = ({language, prefix, body}) => {
 }
 
 const addSnippetsToAtom = () => {
-  let atomSnippetMap = _.cloneDeep(snippetMap)
-  for (let language in atomSnippetMap) {
-    if (atomSnippetMap.hasOwnProperty(language)) {
-      let languageSnippets = atomSnippetMap[language]
-      let languageScope = getLanguageScopeForAtom(language)
+  let atomSnippetMap = {}
+  for (let language in snippetMap) {
+    if (snippetMap.hasOwnProperty(language)) {
+      const languageSnippets = snippetMap[language]
+      const languageScope = getLanguageScopeForAtom(language)
       atomSnippetMap[languageScope] = languageSnippets
     }
   }
-  fs.writeFileSync(os.homedir() + '/.atom/snippets.cson', cson.stringify(atomSnippetMap, null, 2))
+  let output = atomSnipsterComment() + '\n' + cson.stringify(atomSnippetMap, null, 2)
+  fs.writeFileSync(os.homedir() + '/.atom/snippets.cson', output)
+  console.log(chalk.green('🎉 Successfully published your snippets to Atom 🎉'))
 }
 
 
@@ -58,9 +62,11 @@ const addSnippetsToVSCode = () => {
         }
       }
       const languageName = getLanguageFileNameForVSCode(language)
-      fs.writeFileSync(os.homedir() + '/Library/Application\ Support/Code/User/snippets/' + languageName + '.json', JSON.stringify(vscodeSnippetMap[language], null, 2))
+      let output = vscodeSnipsterComment() + '\n' + JSON.stringify(vscodeSnippetMap[language], null, 2)
+      fs.writeFileSync(os.homedir() + '/Library/Application\ Support/Code/User/snippets/' + languageName + '.json', output)
     }
   }
+  console.log(chalk.green('🎉 Successfully published your snippets to VSCode 🎉'))
 }
 
 const addSnippetsToEditor = (editor) => {
@@ -97,7 +103,6 @@ const publish = () => {
       desiredEditors.map(editor => {
         addSnippetsToEditor(editor) 
       })
-      console.log(chalk.green('🎉 Successfully published your snippets to these editors: ' + desiredEditors.join(', ') + ' 🎉'))
     } 
     /* Else use the editors listed in user's .snipster file */
     else {
@@ -108,7 +113,6 @@ const publish = () => {
           addSnippetsToEditor(editor)
           
         })
-        console.log(chalk.green('🎉  Successfully published your snippets to these editors: ' + userSettings.editors.join(', ') + ' 🎉'))
       })
     }
   })

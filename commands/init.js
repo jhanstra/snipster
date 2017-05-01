@@ -37,7 +37,6 @@ const init = () => {
       directory: directory,
       editors: editors
     }
-    console.log(userSettings)
     fs.writeFile(os.homedir() + '/.snipster', JSON.stringify(userSettings, null, 2), err => {
       if (err) { return console.log(chalk.red(err)) }
       console.log(chalk.green("Your information has been saved! Run ") + chalk.yellow('snipster publish') + chalk.green(' to publish your snippets to your text editors.'))
