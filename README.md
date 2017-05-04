@@ -1,7 +1,6 @@
-# snipster
-🤓 🚴‍♀️ ☕ **a snippets manager for hipsters** ☕ 🚴‍ 🤓
+# ☕ snipster
 
-**snipster publishes all of your snippets to all of your editors with one command**
+#### publish all of your snippets to all of your editors with one command.
 
 write and arrange snippets *by file*, rather than tediously hand-editing 1000-line json/cson/xml files.
 
@@ -15,7 +14,7 @@ snipster init
 ```
 
 ## how it works
-write snippets as you would normally write code - don't worry about wrangling them into a json or cson object, quoting every single line, escaping tabs and new lines, indenting, etc. leave all of that complexity for snipster.
+write snippets as you would normally write code - don't worry about wrangling them into a json or cson object, rewriting them for every text editor you use, quoting every single line, escaping tabs and new lines, indenting, etc. leave all of that complexity for snipster.
 
 1. the name of your snippet file is the prefix you use to call it.
 2. the file extension of your snippet file is the language scope under which the snippet can be used. get fancy with multi-scope extensions like 'html+md+txt' that will make the snippet available to those scopes, or use shortcut extensions like 'all' or 'style' to use the snippet in *all* file types or all similar *style* file types (css, less, scss), respectively.
@@ -37,7 +36,7 @@ write snippets as you would normally write code - don't worry about wrangling th
 **atom**
 ```
 '.source.gfm':
-  'hipster':
+  'Hipster Ipsum':
     prefix: "hipsum"
     body: "Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse."
   ... all of your other snippets ...
@@ -51,16 +50,15 @@ Man bun mumblecore bicycle rights next level, distillery scenester fanny pack ar
 
 ## api
 - `snipster init`
-  - get set up with snipster by telling it where your snippets are and which text editors you use.
+  - get set up with snipster by telling it where your snippets are and which text editors you use. snipster will transfer over your editors' pre-existing snippets.
 
-- `snipster publish [editor]`
-  - publish all of the snippets in your directory to your text editors (currently vscode and atom are supported). after running this, you should be able to use all of your snippets across either editor. by default, snipster will publish to all of the editors you provide during `snipster init`. if you wish to publish only to specific editors, pass them as options, e.g. `snipster publish atom` or `snipster publish code`
+- `snipster publish`
+  - publish all of the snippets in your directory to your text editors (currently vscode and atom are supported). after running this, you should be able to use all of your snippets across either editor. by default, snipster will publish to all of the editors you provide during `snipster init`.
+  - **options:** [editor(s)] - publish only to certain editors by passing them as arguments, e.g. `snipster publish atom` or `snipster publish code`.
 
-- `snipster list [scope]`
-  - list all of the snippets in your directory, or filter by language scope, e.g. `snipster list js` or `snipster list md`
-
-- `snipster add`
-  - coming soon
+- `snipster list`
+  - list all of the snippets in your directory.
+  - **options:** [language] - filter by language scope, e.g. `snipster list js` or `snipster list md`.
 
 - `snipster help`
   - alias for `snipster --help`. provides details on how to use snipster.
