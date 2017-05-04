@@ -1,6 +1,6 @@
-# ☕ snipster
+# snipster
 
-#### publish all of your snippets to all of your editors with one command.
+### publish all of your snippets to all of your editors with one command.
 
 write and arrange snippets *by file*, rather than tediously hand-editing 1000-line json/cson/xml files.
 
@@ -42,11 +42,18 @@ write snippets as you would normally write code - don't worry about wrangling th
   ... all of your other snippets ...
 ```
 
-**snipster (hipsum.md)**
+**snipster**
 ```
 Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse.
 ```
 
+## support
+snipster currently supports [vscode](https://code.visualstudio.com/) and [atom](https://atom.io/). support for more editors coming soon - suggestions and contributions welcome. 
+
+<!--## benefits
+- **write once.** write your snippet once, publish to all of your text editors
+- **easy to write.** just write the snippet, don't write a JSON object
+- **easily manage scope.** -->
 
 ## api
 - `snipster init`
