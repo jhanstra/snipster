@@ -20,7 +20,67 @@ write snippets as you would normally write code - don't worry about wrangling th
 2. the file extension of your snippet file is the language scope under which the snippet can be used. get fancy with multi-scope extensions like 'html+md+txt' that will make the snippet available to those scopes, or use shortcut extensions like 'all' or 'style' to use the snippet in *all* file types or all similar *style* file types (css, less, scss), respectively.
 3. the content of the file is the snippet body, exactly what will appear when you type the prefix and tab. use tab stop fields ($1, $2) and placeholders ($1{placeholder}) just like you would normally.
 
-## example
+## examples
+**hipsum.md**
+```
+Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse.
+```
+
+**rcc.js**
+```
+export default class $1 extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render () {
+    return (
+      $2
+    )
+  }
+}
+
+$1.propTypes = {
+  $3
+};
+```
+
+**doctype.html**
+```
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>$1</title>
+    <meta name="description" content="$2">
+    <meta name="author" content="$3">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="$4">
+
+    <!--[if lt IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    $5
+  </body>
+</html>
+```
+
+**bgimg.style**
+```
+background-image: url('$1');
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center center;
+```
+Note: the `style` file extension makes this snippet available to `css`, `scss`, and `less` language scopes :)
+
+## comparison
 **vs code**
 ```
 "Hipster Ipsum": {
