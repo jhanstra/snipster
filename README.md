@@ -60,7 +60,7 @@ snipster currently supports [vscode](https://code.visualstudio.com/) and [atom](
   - get set up with snipster by telling it where your snippets are and which text editors you use. snipster will transfer over your editors' pre-existing snippets.
 
 - `snipster publish`
-  - publish all of the snippets in your directory to your text editors (currently vscode and atom are supported). after running this, you should be able to use all of your snippets across either editor. by default, snipster will publish to all of the editors you provide during `snipster init`.
+  - publish all of the snippets in your directory to your text editors. after running this, you should be able to use all of your snippets across either editor.
   - **options:** [editor(s)] - publish only to certain editors by passing them as arguments, e.g. `snipster publish atom` or `snipster publish code`.
 
 - `snipster list`
