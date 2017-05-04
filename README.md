@@ -71,16 +71,32 @@ $1.propTypes = {
 </html>
 ```
 
-**bgimg.style**
-```
-background-image: url('$1');
-background-size: cover;
-background-repeat: no-repeat;
-background-position: center center;
-```
-Note: the `style` file extension makes this snippet available to `css`, `scss`, and `less` language scopes :)
+## support
+snipster currently supports [vscode](https://code.visualstudio.com/) and [atom](https://atom.io/). support for more editors coming soon - suggestions and contributions welcome. 
+
+<!--## benefits
+- **write once.** write your snippet once, publish to all of your text editors
+- **easy to write.** just write the snippet, don't write a JSON object
+- **easily manage scope.** -->
+
+## api
+- `snipster init`
+  - get set up with snipster by telling it where your snippets are and which text editors you use. snipster will transfer over your editors' pre-existing snippets.
+
+- `snipster publish`
+  - publish all of the snippets in your directory to your text editors. after running this, you should be able to use all of your snippets across either editor.
+  - **options:** [editor(s)] - publish only to certain editors by passing them as arguments, e.g. `snipster publish atom` or `snipster publish code`.
+
+- `snipster list`
+  - list all of the snippets in your directory.
+  - **options:** [language] - filter by language scope, e.g. `snipster list js` or `snipster list md`.
+
+- `snipster help`
+  - alias for `snipster --help`. provides details on how to use snipster.
 
 ## comparison
+less code is better code. simpler code is better code.
+
 **vs code**
 ```
 "Hipster Ipsum": {
@@ -106,30 +122,6 @@ Note: the `style` file extension makes this snippet available to `css`, `scss`, 
 ```
 Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse.
 ```
-
-## support
-snipster currently supports [vscode](https://code.visualstudio.com/) and [atom](https://atom.io/). support for more editors coming soon - suggestions and contributions welcome. 
-
-<!--## benefits
-- **write once.** write your snippet once, publish to all of your text editors
-- **easy to write.** just write the snippet, don't write a JSON object
-- **easily manage scope.** -->
-
-## api
-- `snipster init`
-  - get set up with snipster by telling it where your snippets are and which text editors you use. snipster will transfer over your editors' pre-existing snippets.
-
-- `snipster publish`
-  - publish all of the snippets in your directory to your text editors. after running this, you should be able to use all of your snippets across either editor.
-  - **options:** [editor(s)] - publish only to certain editors by passing them as arguments, e.g. `snipster publish atom` or `snipster publish code`.
-
-- `snipster list`
-  - list all of the snippets in your directory.
-  - **options:** [language] - filter by language scope, e.g. `snipster list js` or `snipster list md`.
-
-- `snipster help`
-  - alias for `snipster --help`. provides details on how to use snipster.
-
 
 ## contribute or donate
 contributions are welcome and enormously helpful. submit feature ideas, issues, pull requests, etc. 
