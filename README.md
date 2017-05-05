@@ -21,7 +21,7 @@ write snippets as you would normally write code - don't worry about wrangling th
 3. the content of the file is the snippet body, exactly what will appear when you type the prefix and tab. use tab stop fields ($1, $2) and placeholders (${1:placeholder}) just like you would normally.
 
 ## examples
-for many more examples and inspiration, see my [snippets directory](https://github.com/jhanstra/dotfiles/tree/master/snippets).
+for many more examples and inspiration, see the creator's [snippets directory](https://github.com/jhanstra/dotfiles/tree/master/snippets).
 
 **hipsum.md**
 ```
