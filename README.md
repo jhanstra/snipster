@@ -108,7 +108,7 @@ snipster is not at 1.0 level yet. it has been tested only on the creator's [mach
 ## comparison
 let's add a snippet called 'hipsum' which writes hipster-flavored lorem ipsum to our editor inside markdown files only.
 
-**in vs code** (`snippets/markdown.json`)
+**in vs code** (`code/user/snippets/markdown.json`)
 ```
 "Hipster Ipsum": {
   "prefix": "hipsum",
@@ -120,7 +120,7 @@ let's add a snippet called 'hipsum' which writes hipster-flavored lorem ipsum to
 ... all of your other snippets ...
 ```
 
-**in atom** (`snippets.cson`)
+**in atom** (`.atom/snippets.cson`)
 ```
 '.source.gfm':
   'Hipster Ipsum':
@@ -129,7 +129,7 @@ let's add a snippet called 'hipsum' which writes hipster-flavored lorem ipsum to
   ... all of your other snippets ...
 ```
 
-**in sublime** (`user/hipsum.sublime-snippet`)
+**in sublime** (`sublime/packages/user/hipsum.sublime-snippet`)
 ```
 <snippet>
 	<tabTrigger>hipsum</tabTrigger>
@@ -141,7 +141,7 @@ let's add a snippet called 'hipsum' which writes hipster-flavored lorem ipsum to
 
 **in snipster** (`hipsum.md`)
 
-after running `snipster publish` it is available in *[all of our text editors](https://giphy.com/search/mind-blown)*.
+after running `snipster publish`, hipsum is available in *[all of our text editors](https://giphy.com/search/mind-blown)*.
 
 ```
 Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse.
