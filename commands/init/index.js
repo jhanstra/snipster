@@ -23,7 +23,7 @@ const init = () => {
     /* Get text editors */
     console.log('\n')
     console.log(chalk.green("Which editors do you wish to publish snippets to? Enter all, comma-delimited."))
-    console.log(chalk.white("Options: VSCode, Atom"))
+    console.log(chalk.white("Options: VSCode, Atom, Sublime"))
     const editorsPrompt = yield prompt('editors: ')
     const editorsArray = editorsPrompt.replace(' ', '').split(',')
     let editors = []

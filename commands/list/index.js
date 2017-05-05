@@ -2,14 +2,14 @@ const fs = require('fs')
 const os = require('os')
 const columnify = require('columnify')
 
-const getSnippetsFromDirectory = require('../../utils/get-snippets')
+const getFilesInDirectory = require('../../utils/get-files-in-directory')
 
 const list = () => {
   let userSettings = {}
   fs.readFile(os.homedir() + '/.snipster', (err, data) => {
     if (err) {return console.log(chalk.red(err)) }
     else { userSettings = JSON.parse(data) }
-    let snippets = getSnippetsFromDirectory(userSettings.directory)
+    let snippets = getFilesInDirectory(userSettings.directory)
     let desiredScope = process.argv.slice(3)
     let snippetList = {}
     if (desiredScope.length != 0) {

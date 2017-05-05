@@ -4,10 +4,12 @@ const chalk = require('chalk')
 const cson = require('cson')
 const write = require('write')
 const stripJsonComments = require('strip-json-comments')
-const leftPad = require('left-pad')
+const parseString = require('xml2js').parseString
 
 const getExtensionFromAtomLanguageScope = require('../../utils/reverse-atom-match')
 const getExtensionFromVSCodeLanguageScope = require('../../utils/reverse-vscode-match')
+const getExtensionFromSublimeLanguageScope = require('../../utils/reverse-sublime-match')
+const getFilesInDirectory = require('../../utils/get-files-in-directory')
 
 const transferMapToSnipster = (preSnipsterMap, editor, userDirectory) => {
   let snippetFilesSynced = []
@@ -19,6 +21,8 @@ const transferMapToSnipster = (preSnipsterMap, editor, userDirectory) => {
         languageExtension = getExtensionFromAtomLanguageScope(languageScope)
       } else if (editor == 'vscode') {
         languageExtension = getExtensionFromVSCodeLanguageScope(languageScope)
+      } else if (editor == 'sublime') {
+        languageExtension = getExtensionFromSublimeLanguageScope(languageScope)
       }
       for (let snippet in preSnipsterMap[languageScope]) {
         let filename = preSnipsterMap[languageScope][snippet].prefix + '.' + languageExtension
@@ -47,8 +51,6 @@ const syncSnippetsFromAtom = (userDirectory) => {
     console.log(chalk.red("Snipster tried to find your pre-existing Atom snippets, but the snippets file does not exist. Please check that you have Atom installed.\nIf you feel there is an error, please submit an issue to ") + chalk.yellow('https://github.com/jhanstra/snipster/issues.'))
   }
   let snippetFilesSynced = transferMapToSnipster(atomPreSnipsterMap, 'atom', userDirectory)
-  // console.log(chalk.green('\n\n\nSuccess! 🎉\x20 Snipster created the following snippets from your ') + chalk.blue('Atom') + chalk.green(' snippets.cson file and added them to your directory:\n'))
-  // console.log(chalk.yellow(snippetFilesSynced.join(', ')))
 }
 
 const syncSnippetsFromVSCode = (userDirectory) => {
@@ -67,9 +69,27 @@ const syncSnippetsFromVSCode = (userDirectory) => {
     }
   })
   let snippetFilesSynced = transferMapToSnipster(vscodePreSnipsterMap, 'vscode', userDirectory)
-  
-  // console.log(chalk.green('\n\n\nSuccess! 🎉\x20 Snipster created the following snippets from your ') + chalk.blue('VSCode') + chalk.green(' snippets files and added them to your directory:\n'))
-  // console.log(chalk.yellow(snippetFilesSynced.join(', ')))
+}
+
+const syncSnippetsFromSublime = (userDirectory) => {
+  let sublimePreSnipsterMap = {}
+  let sublimeSnippetFiles = getFilesInDirectory(os.homedir() + '/Library/Application\ Support/Sublime\ Text\ 3/Packages/User')
+  sublimeSnippetFiles.map(file => {
+    if (file.includes('sublime-snippet')) {
+      let fileBody = fs.readFileSync(file, 'utf-8')
+      parseString(fileBody, (err, result) => {
+        let language = 'all'
+        if (result.snippet.hasOwnProperty('scope')) { language = result.snippet.scope[0] }
+        let snippet = result.snippet.tabTrigger[0]
+        sublimePreSnipsterMap[language] = {}
+        sublimePreSnipsterMap[language][snippet] = {
+          prefix: snippet,
+          body: result.snippet.content[0]
+        }
+      })
+    }
+  })
+  let snippetFilesSynced = transferMapToSnipster(sublimePreSnipsterMap, 'sublime', userDirectory)
 }
 
 const syncPreExistingSnippets = (editor, userDirectory) => {
@@ -80,6 +100,9 @@ const syncPreExistingSnippets = (editor, userDirectory) => {
       break
     case ('vscode' || 'vs code' || 'code' || 'vs-code' || 'vsc' || 'v' || 'c'):
       syncSnippetsFromVSCode(userDirectory)
+      break
+    case ('sublime'):
+      syncSnippetsFromSublime(userDirectory)
       break
   }
 }

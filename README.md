@@ -2,7 +2,7 @@
 
 ### publish all of your snippets to all of your editors with one command.
 
-write and arrange snippets *by file*, rather than tediously hand-editing 1000-line json/cson/xml files.
+write and arrange snippets *by file*, rather than tediously hand-editing 1000-line json/cson/xml files. no meta content.
 
 ## install & set-up
 ```
@@ -84,7 +84,7 @@ snipster currently supports [vscode](https://code.visualstudio.com/), [atom](htt
   - get set up with snipster by telling it where your snippets are and which text editors you use. snipster will transfer over your editors' pre-existing snippets.
 
 - `snipster publish`
-  - publish all of the snippets in your directory to your text editors. after running this, you should be able to use all of your snippets across either editor.
+  - publish all of the snippets in your directory to your text editors. after running this, you should be able to use all of your snippets across any editor.
   - **options:** [editor(s)] - publish only to certain editors by passing them as arguments, e.g. `snipster publish atom` or `snipster publish code`.
 
 - `snipster list`

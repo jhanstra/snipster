@@ -3,12 +3,16 @@ const os = require('os')
 const chalk = require('chalk')
 const cson = require('cson')
 const _ = require('lodash')
+const write = require('write')
+const jsontoxml = require('jsontoxml')
 
 const getLanguageScopeForAtom = require('../../utils/atom-match')
 const getLanguageFileNameForVSCode = require('../../utils/vscode-match')
-const getSnippetsFromDirectory = require('../../utils/get-snippets')
+const getLanguageScopeForSublime = require('../../utils/sublime-match')
+const getFilesInDirectory = require('../../utils/get-files-in-directory')
 const atomSnipsterComment = require('../../utils/atom-comment')
 const vscodeSnipsterComment = require('../../utils/vscode-comment')
+const sublimeSnipsterComment = require('../../utils/sublime-comment')
 
 let snippetMap = {}
 let atomSnippetMap = {}
@@ -60,8 +64,6 @@ const addSnippetsToVSCode = () => {
   let vscodeSnippetMap = _.cloneDeep(snippetMap);
   for(let language in vscodeSnippetMap) {
     if (vscodeSnippetMap.hasOwnProperty(language)) {
-      let languageSnippets = vscodeSnippetMap[language]
-      vscodeSnippetMap[language] = languageSnippets
       for (let snippet in vscodeSnippetMap[language]) {
         if (vscodeSnippetMap[language].hasOwnProperty(snippet)) {
           vscodeSnippetMap[language][snippet].body = vscodeSnippetMap[language][snippet].body.split('\n')
@@ -83,6 +85,32 @@ const addSnippetsToVSCode = () => {
   }
 }
 
+const addSnippetsToSublime = () => {
+  let failedToPublish = false
+  let sublimeSnippetMap = _.cloneDeep(snippetMap)
+  for(let language in sublimeSnippetMap) {
+    if (sublimeSnippetMap.hasOwnProperty(language)) {
+      for (let snippet in sublimeSnippetMap[language]) {
+        let sublimeSnippet = {snippet: {}}
+        sublimeSnippet.snippet.tabTrigger = sublimeSnippetMap[language][snippet].prefix
+        sublimeSnippet.snippet.scope = getLanguageScopeForSublime(language)
+        sublimeSnippet.snippet.content = jsontoxml.cdata(sublimeSnippetMap[language][snippet].body)
+        let xml = jsontoxml(sublimeSnippet, { prettyPrint: true })
+        try {
+          write.sync(os.homedir() + '/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/snipster/' + sublimeSnippetMap[language][snippet].prefix + '.' + language + '.sublime-snippet', sublimeSnipsterComment() + xml)
+        } catch(e) {
+          failedToPublish = true
+        }
+      }
+    }
+  }
+  if (failedToPublish) {
+    console.log(chalk.green("Something went wrong while publishing your snippets to Sublime. Please check that you have Sublime installed.\nIf you feel there is an error, please submit an issue to ") + chalk.yellow('https://github.com/jhanstra/snipster/issues.'))
+  } else {
+    console.log(chalk.green('🎉 Successfully published your snippets to Sublime 🎉'))
+  }
+}
+
 const addSnippetsToEditor = (editor) => {
   editor = editor.toLowerCase()
   switch (editor) {
@@ -92,6 +120,9 @@ const addSnippetsToEditor = (editor) => {
     case ('vscode' || 'vs code' || 'code' || 'vs-code' || 'vsc' || 'v' || 'c'):
       addSnippetsToVSCode()
       break
+    case ('sublime' || 'subl' || 's' || 'sublime text' || 'sublime text 3' || 'sublime text 2'):
+      addSnippetsToSublime()
+      break
   }
 }
 
@@ -100,7 +131,7 @@ const publish = () => {
   fs.readFile(os.homedir() + '/.snipster', (err, data) => {
     if (err) {return console.log(chalk.red(err)) }
     else { userSettings = JSON.parse(data) }
-    let snippets = getSnippetsFromDirectory(userSettings.directory)
+    let snippets = getFilesInDirectory(userSettings.directory)
 
     snippets.map(s => {
       const snippet = {
@@ -125,7 +156,6 @@ const publish = () => {
         else { userSettings = JSON.parse(data) }
         userSettings.editors.map(editor => {
           addSnippetsToEditor(editor)
-          
         })
       })
     }
