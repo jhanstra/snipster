@@ -3,59 +3,59 @@ const getLanguageScopeForSublime = (language) => {
     case ('all'):
       return ''
     case ('clj' || 'cljs' || 'cljc' || 'edn' ):
-      return '.source.clojure'
+      return 'source.clojure'
     case ('coffee' || 'coffeelit'):
-      return '.source.coffee'
+      return 'source.coffee'
     case ('cs', 'csharp'):
-      return '.source.cs'
+      return 'source.cs'
     case ('css'):
-      return '.source.css'
+      return 'source.css'
     case ('cc' || 'cpp'):
-      return '.source.cpp'
+      return 'source.cpp'
     case ('f#' || 'fs' || 'fsi' || 'ml' || 'mli' || 'fsx' || 'fsscript'):
-      return '.source.fs'
+      return 'source.fs'
     case ('git' || 'gitcommit' || 'gitrebase'):
-      return '.text.git-commit'
+      return 'text.git-commit'
     case ('handlebars' || 'hbs'):
-      return '.source.hbs'
+      return 'source.hbs'
     case ('html'):
-      return '.text.html'
+      return 'text.html'
     case ('js' || 'javascript'):
-      return '.source.js'
+      return 'source.js'
     case ('jsx' || 'react'):
-      return '.source.jsx'
+      return 'source.jsx'
     case ('less'):
-      return '.source.css.less'
+      return 'source.css.less'
     case ('make'):
-      return '.source.makefile'
+      return 'source.makefile'
     case ('md' || 'markdown' || 'gfm' || 'mark' || 'mkdown' || 'mdml' || 'mdown' || 'mdtext'):
-      return '.text.html.markdown'
+      return 'text.html.markdown'
     case ('mustache'):
-      return '.text.html.mustache'
+      return 'text.html.mustache'
     case ('m' || 'h' || 'objc' || 'objective-c' || 'objectivec' || 'oc'):
-      return '.source.objc'
+      return 'source.objc'
     case ('php'):
-      return '.text.html.php'
+      return 'text.html.php'
     case ('pl'):
-      return '.source.perl'
+      return 'source.perl'
     case ('ps1' || 'ps' || 'pwrshell'):
-      return '.source.powershell'
+      return 'source.powershell'
     case ('cshtml' || 'vbhtml'):
-      return '.source.razor'
+      return 'source.razor'
     case ('rb' || 'so'):
-      return '.source.ruby'
+      return 'source.ruby'
     case ('sass' || 'scss'):
-      return '.source.scss'
+      return 'source.scss'
     case ('sh' || 'bash' || 'shell'):
-      return '.source.shell'
+      return 'source.shell'
     case ('ts'):
-      return '.source.typescript'
+      return 'source.typescript'
     case ('xml'):
-      return '.text.xml'
+      return 'text.xml'
     case ('yml'):
-      return '.source.yaml'
+      return 'source.yaml'
     default:
-      return '.source.' + language
+      return 'source.' + language
   }
 }
 
