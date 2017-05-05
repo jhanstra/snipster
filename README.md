@@ -101,12 +101,14 @@ snipster is not at 1.0 level yet. it has been tested only on the creator's [mach
 - `snipster help`
   - alias for `snipster --help`. provides details on how to use snipster.
 
-- List of named extensions:
+- list of named extensions:
+  - **all**: all languages
+  - **style**: css + scss + less
 
 ## comparison
-less code is better code. simpler code is better code.
+let's add a snippet called 'hipsum' which writes hipster-flavored lorem ipsum to our editor inside markdown files only.
 
-**vs code**
+**in vs code**
 ```
 "Hipster Ipsum": {
   "prefix": "hipsum",
@@ -118,7 +120,7 @@ less code is better code. simpler code is better code.
 ... all of your other snippets ...
 ```
 
-**atom**
+**in atom**
 ```
 '.source.gfm':
   'Hipster Ipsum':
@@ -127,12 +129,24 @@ less code is better code. simpler code is better code.
   ... all of your other snippets ...
 ```
 
-**snipster**
+**in sublime**
+```
+<snippet>
+	<tabTrigger>hipsum</tabTrigger>
+	<scope>text.html.markdown</scope>
+	<content><![CDATA[Tilde beard sriracha, ennui 8-bit jianbing umami. Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse. Tumblr farm-to-table artisan butcher aesthetic, umami organic forage distillery microdosing four loko whatever truffaut master cleanse. La croix williamsburg next level tumblr, cliche literally semiotics. Paleo kombucha bushwick ethical occupy. VHS vice literally hella lumbersexual. Locavore health goth cardigan, selfies iceland edison bulb sriracha cred.]]></content>
+</snippet>
+
+```
+
+**in snipster**: 
+the following is placed in a `hipsum.md` file. after running `snipster publish` it is available in *all of our text editors*.
 ```
 Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse.
 ```
+[why didn't we think of this sooner?](https://giphy.com/search/mind-blown)
 
 ## contribute or donate
-contributions are welcome and enormously helpful. submit feature ideas, issues, pull requests, etc. 
+contributions are welcome and enormously helpful. submit [feature ideas](https://github.com/jhanstra/snipster/projects/1), [issues](https://github.com/jhanstra/snipster/issues/new), [pull requests](https://github.com/jhanstra/snipster/pulls), etc. 
 
 if you find value in snipster please feel free to [buy me a ☕](https://www.paypal.me/jhanstra/4) :)
