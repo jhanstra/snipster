@@ -1,12 +1,12 @@
 const fs = require('fs')
 
-const getSnippetsFromDirectory = (dir) => {
+const getFilesInDirectory = (dir) => {
   let results = [];
   fs.readdirSync(dir).map(file => {
     file = dir + '/' + file
     let stat = fs.statSync(file)
     if (stat && stat.isDirectory()) {
-      results = results.concat(getSnippetsFromDirectory(file))
+      results = results.concat(getFilesInDirectory(file))
     } 
     else {
       results.push(file)
@@ -15,4 +15,4 @@ const getSnippetsFromDirectory = (dir) => {
   return results;
 }
 
-module.exports = getSnippetsFromDirectory
+module.exports = getFilesInDirectory
