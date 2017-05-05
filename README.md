@@ -1,4 +1,4 @@
-# snipster
+# snipster · [![npm version](https://badge.fury.io/js/snipster.svg)](https://badge.fury.io/js/snipster)
 
 ### publish all of your snippets to all of your editors with one command.
 
