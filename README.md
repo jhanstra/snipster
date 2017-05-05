@@ -108,7 +108,7 @@ snipster is not at 1.0 level yet. it has been tested only on the creator's [mach
 ## comparison
 let's add a snippet called 'hipsum' which writes hipster-flavored lorem ipsum to our editor inside markdown files only.
 
-**in vs code**
+**in vs code** (`snippets/markdown.json`)
 ```
 "Hipster Ipsum": {
   "prefix": "hipsum",
@@ -120,7 +120,7 @@ let's add a snippet called 'hipsum' which writes hipster-flavored lorem ipsum to
 ... all of your other snippets ...
 ```
 
-**in atom**
+**in atom** (`snippets.cson`)
 ```
 '.source.gfm':
   'Hipster Ipsum':
@@ -129,24 +129,23 @@ let's add a snippet called 'hipsum' which writes hipster-flavored lorem ipsum to
   ... all of your other snippets ...
 ```
 
-**in sublime**
+**in sublime** (`user/hipsum.sublime-snippet`)
 ```
 <snippet>
 	<tabTrigger>hipsum</tabTrigger>
 	<scope>text.html.markdown</scope>
-	<content><![CDATA[Tilde beard sriracha, ennui 8-bit jianbing umami. Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse. Tumblr farm-to-table artisan butcher aesthetic, umami organic forage distillery microdosing four loko whatever truffaut master cleanse. La croix williamsburg next level tumblr, cliche literally semiotics. Paleo kombucha bushwick ethical occupy. VHS vice literally hella lumbersexual. Locavore health goth cardigan, selfies iceland edison bulb sriracha cred.]]></content>
+	<content><![CDATA[Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse.]]></content>
 </snippet>
 
 ```
 
-**in snipster**
+**in snipster** (`hipsum.md`)
 
-the following is placed in a `hipsum.md` file. after running `snipster publish` it is available in *all of our text editors*.
+after running `snipster publish` it is available in *[all of our text editors](https://giphy.com/search/mind-blown)*.
 
 ```
 Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse.
 ```
-[why didn't we think of this sooner?](https://giphy.com/search/mind-blown)
 
 ## contribute or donate
 contributions are welcome and enormously helpful. submit [feature ideas](https://github.com/jhanstra/snipster/projects/1), [issues](https://github.com/jhanstra/snipster/issues/new), [pull requests](https://github.com/jhanstra/snipster/pulls), etc. 
