@@ -14,13 +14,15 @@ snipster init
 ```
 
 ## how it works
-write snippets as you would normally write code - don't worry about wrangling them into a json or cson object, rewriting them for every text editor you use, quoting every single line, escaping tabs and new lines, indenting, etc. leave all of that complexity for snipster.
+write snippets as you would normally write code - don't worry about wrangling them into a json or xml object, rewriting them for every text editor you use, quoting every single line, escaping tabs and new lines, indenting, etc. leave all of that complexity for snipster.
 
 1. the name of your snippet file is the prefix you use to call it.
 2. the file extension of your snippet file is the language scope under which the snippet can be used. get fancy with multi-scope extensions like 'html+md+txt' that will make the snippet available to those scopes, or use shortcut extensions like 'all' or 'style' to use the snippet in *all* file types or all similar *style* file types (css, less, scss), respectively.
 3. the content of the file is the snippet body, exactly what will appear when you type the prefix and tab. use tab stop fields ($1, $2) and placeholders ($1{placeholder}) just like you would normally.
 
 ## examples
+for many more examples and inspiration, see my [snippets directory](https://github.com/jhanstra/dotfiles/tree/master/snippets).
+
 **hipsum.md**
 ```
 Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse.
