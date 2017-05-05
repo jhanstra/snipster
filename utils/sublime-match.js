@@ -1,4 +1,4 @@
-const getLanguageScopeForAtom = (language) => {
+const getLanguageScopeForSublime = (language) => {
   switch(language) {
     case ('all'):
       return ''
@@ -59,4 +59,4 @@ const getLanguageScopeForAtom = (language) => {
   }
 }
 
-module.exports = getLanguageScopeForAtom
+module.exports = getLanguageScopeForSublime

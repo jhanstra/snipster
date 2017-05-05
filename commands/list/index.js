@@ -9,7 +9,7 @@ const list = () => {
   fs.readFile(os.homedir() + '/.snipster', (err, data) => {
     if (err) {return console.log(chalk.red(err)) }
     else { userSettings = JSON.parse(data) }
-    let snippets = getSnippetsFromDirectory(userSettings.directory)
+    let snippets = getFilesInDirectory(userSettings.directory)
     let desiredScope = process.argv.slice(3)
     let snippetList = {}
     if (desiredScope.length != 0) {

@@ -86,8 +86,8 @@ const addSnippetsToVSCode = () => {
 }
 
 const addSnippetsToSublime = () => {
+  let failedToPublish = false
   let sublimeSnippetMap = _.cloneDeep(snippetMap)
-  console.log(sublimeSnippetMap)
   for(let language in sublimeSnippetMap) {
     if (sublimeSnippetMap.hasOwnProperty(language)) {
       for (let snippet in sublimeSnippetMap[language]) {
@@ -96,14 +96,22 @@ const addSnippetsToSublime = () => {
         sublimeSnippet.snippet.scope = getLanguageScopeForSublime(language)
         sublimeSnippet.snippet.content = jsontoxml.cdata(sublimeSnippetMap[language][snippet].body)
         let xml = jsontoxml(sublimeSnippet, { prettyPrint: true })
-        write.sync(os.homedir() + '/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/snipster/' + sublimeSnippetMap[language][snippet].prefix + '.' + language + '.sublime-snippet', sublimeSnipsterComment() + xml)
+        try {
+          write.sync(os.homedir() + '/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/snipster/' + sublimeSnippetMap[language][snippet].prefix + '.' + language + '.sublime-snippet', sublimeSnipsterComment() + xml)
+        } catch(e) {
+          failedToPublish = true
+        }
       }
     }
+  }
+  if (failedToPublish) {
+    console.log(chalk.green("Something went wrong while publishing your snippets to Sublime. Please check that you have Sublime installed.\nIf you feel there is an error, please submit an issue to ") + chalk.yellow('https://github.com/jhanstra/snipster/issues.'))
+  } else {
+    console.log(chalk.green('🎉 Successfully published your snippets to Sublime 🎉'))
   }
 }
 
 const addSnippetsToEditor = (editor) => {
-  console.log(editor)
   editor = editor.toLowerCase()
   switch (editor) {
     case ('atom' || 'a' || 'atm'):
@@ -113,7 +121,6 @@ const addSnippetsToEditor = (editor) => {
       addSnippetsToVSCode()
       break
     case ('sublime' || 'subl' || 's' || 'sublime text' || 'sublime text 3' || 'sublime text 2'):
-      console.log('subl')
       addSnippetsToSublime()
       break
   }
