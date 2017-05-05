@@ -72,7 +72,7 @@ $1.propTypes = {
 ```
 
 ## support
-snipster currently supports [vscode](https://code.visualstudio.com/), [atom](https://atom.io/), and [sublime] on mac only. support for windows and more editors should be coming soon - suggestions and contributions welcome. 
+snipster currently supports [vscode](https://code.visualstudio.com/), [atom](https://atom.io/), and [sublime](https://www.sublimetext.com/) on mac only. support for windows and more editors should be coming soon - suggestions and contributions welcome. 
 
 <!--## benefits
 - **write once.** write your snippet once, publish to all of your text editors
