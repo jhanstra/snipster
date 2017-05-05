@@ -139,8 +139,10 @@ let's add a snippet called 'hipsum' which writes hipster-flavored lorem ipsum to
 
 ```
 
-**in snipster**: 
+**in snipster**
+
 the following is placed in a `hipsum.md` file. after running `snipster publish` it is available in *all of our text editors*.
+
 ```
 Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse.
 ```
