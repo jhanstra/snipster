@@ -1,60 +1,62 @@
 const getExtensionFromAtomLanguageScope = (languageScope) => {
   switch(languageScope) {
-    case ('.text, .source'):
+    case '.text, .source':
       return 'all'
-    case ('.source.clojure' ):
+    case '.source.clojure' :
       return 'clj'
-    case ('.source.coffee'):
+    case '.source.coffee':
       return 'coffee'
-    case ('.source.cs'):
+    case '.source.cs':
       return 'cs'
-    case ('.source.css'):
+    case '.source.css':
       return 'css'
-    case ('.source.cpp'):
+    case '.source.cpp':
       return 'cpp'
-    case ('.source.fs'):
+    case '.source.fs':
       return 'fs'
-    case ('.text.git-commit'):
+    case '.text.git-commit':
       return 'git'
-    case ('.source.hbs'):
+    case '.source.hbs':
       return 'hbs'
-    case ('.text.html'):
+    case '.text.html':
       return 'html'
-    case ('.source.js'):
+    case '.source.js':
       return 'js'
-    case ('.source.jsx'):
+    case '.source.jsx':
       return 'jsx'
-    case ('.source.css.less'):
+    case '.source.css.less':
       return 'less'
-    case ('.source.makefile'):
+    case '.source.makefile':
       return 'make'
-    case ('.source.gfm'):
+    case '.source.gfm':
       return 'md'
-    case ('.text.html.mustache'):
+    case '.text.html.mustache':
       return 'mustache'
-    case ('.source.objc'):
+    case '.source.objc':
       return 'objc'
-    case ('.text.html.php'):
+    case '.text.html.php':
       return 'php'
-    case ('.source.perl'):
+    case '.source.perl':
       return 'pl'
-    case ('.source.powershell'):
+    case '.source.powershell':
       return 'ps1'
-    case ('.source.razor'):
+    case '.source.razor':
       return 'vbhtml'
-    case ('.source.html.erb'):
+    case '.source.html.erb':
       return 'rb'
-    case ('.text.html.ruby'):
+    case '.text.html.ruby':
       return '.ror'
-    case ('.source.scss'):
+    case '.source.scss':
       return 'scss'
-    case ('.source.shell'):
+    case '.source.shell':
       return 'sh'
-    case ('.source.ts, .source.tsx' || '.source.ts' || '.source.tsx'):
+    case '.source.ts, .source.tsx':
+    case '.source.ts':
+    case '.source.tsx':
       return 'ts'
-    case ('.text.xml'):
+    case '.text.xml':
       return 'xml'
-    case ('.source.yaml'):
+    case '.source.yaml':
       return 'yml'
     default:
       return languageScope.replace('.source.', '')

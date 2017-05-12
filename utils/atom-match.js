@@ -1,60 +1,97 @@
 const getLanguageScopeForAtom = (language) => {
   switch(language) {
-    case ('all'):
+    case 'all':
       return '.text, .source'
-    case ('clj' || 'cljs' || 'cljc' || 'edn' ):
+    case 'clj':
+    case 'cljs':
+    case 'cljc':
+    case 'edn' :
       return '.source.clojure'
-    case ('coffee' || 'coffeelit'):
+    case 'coffee':
+    case 'coffeelit':
       return '.source.coffee'
-    case ('cs', 'csharp'):
+    case 'cs':
+    case 'csharp':
       return '.source.cs'
-    case ('css'):
+    case 'css':
       return '.source.css'
-    case ('cc' || 'cpp'):
+    case 'cc':
+    case 'cpp':
       return '.source.cpp'
-    case ('f#' || 'fs' || 'fsi' || 'ml' || 'mli' || 'fsx' || 'fsscript'):
+    case 'f#':
+    case 'fs':
+    case 'fsi':
+    case 'ml':
+    case 'mli':
+    case 'fsx':
+    case 'fsscript':
       return '.source.fs'
-    case ('git' || 'gitcommit' || 'gitrebase'):
+    case 'git':
+    case 'gitcommit':
+    case 'gitrebase':
       return '.text.git-commit'
-    case ('handlebars' || 'hbs'):
+    case 'handlebars':
+    case 'hbs':
       return '.source.hbs'
-    case ('html'):
+    case 'html':
       return '.text.html'
-    case ('js' || 'javascript'):
+    case 'js':
+    case 'javascript':
       return '.source.js'
-    case ('jsx' || 'react'):
+    case 'jsx':
+    case 'react':
       return '.source.jsx'
-    case ('less'):
+    case 'less':
       return '.source.css.less'
-    case ('make'):
+    case 'make':
       return '.source.makefile'
-    case ('md' || 'markdown' || 'gfm' || 'mark' || 'mkdown' || 'mdml' || 'mdown' || 'mdtext'):
+    case 'md':
+    case 'markdown':
+    case 'gfm':
+    case 'mark':
+    case 'mkdown':
+    case 'mdml':
+    case 'mdown':
+    case 'mdtext':
       return '.source.gfm'
-    case ('mustache'):
+    case 'mustache':
       return '.text.html.mustache'
-    case ('m' || 'h' || 'objc' || 'objective-c' || 'objectivec' || 'oc'):
+    case 'm':
+    case 'h':
+    case 'objc':
+    case 'objective-c':
+    case 'objectivec':
+    case 'oc':
       return '.source.objc'
-    case ('php'):
+    case 'php':
       return '.text.html.php'
-    case ('pl'):
+    case 'pl':
       return '.source.perl'
-    case ('ps1' || 'ps' || 'pwrshell'):
+    case 'ps1':
+    case 'ps':
+    case 'pwrshell':
       return '.source.powershell'
-    case ('cshtml' || 'vbhtml'):
+    case 'cshtml':
+    case 'vbhtml':
       return '.source.razor'
-    case ('rb' || 'so'):
+    case 'rb':
+    case 'so':
       return '.source.html.erb'
-    case ('ror' || 'rubyonrails'):
+    case 'ror':
+    case 'rubyonrails':
       return '.text.html.ruby'
-    case ('sass' || 'scss'):
+    case 'sass':
+    case 'scss':
       return '.source.scss'
-    case ('sh' || 'bash' || 'shell'):
+    case 'sh':
+    case 'bash':
+    case 'shell':
       return '.source.shell'
-    case ('ts'):
+    case 'ts':
       return '.source.ts, .source.tsx'
-    case ('xml'):
+    case 'xml':
       return '.text.xml'
-    case ('yml'):
+    case 'yml':
       return '.source.yaml'
     default:
       return '.source.' + language

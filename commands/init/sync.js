@@ -95,13 +95,21 @@ const syncSnippetsFromSublime = (userDirectory) => {
 const syncPreExistingSnippets = (editor, userDirectory) => {
   editor = editor.toLowerCase()
   switch (editor) {
-    case ('atom' || 'a' || 'atm'):
+    case 'atom':
+    case 'a':
+    case 'atm':
       syncSnippetsFromAtom(userDirectory)
       break
-    case ('vscode' || 'vs code' || 'code' || 'vs-code' || 'vsc' || 'v' || 'c'):
+    case 'vscode':
+    case 'vs code':
+    case 'code':
+    case 'vs-code':
+    case 'vsc':
+    case 'v':
+    case 'c':
       syncSnippetsFromVSCode(userDirectory)
       break
-    case ('sublime'):
+    case 'sublime':
       syncSnippetsFromSublime(userDirectory)
       break
   }

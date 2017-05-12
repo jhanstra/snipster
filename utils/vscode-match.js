@@ -1,42 +1,77 @@
-const getLanguageFileNameForVSCode = (language) => {
+const getLanguageFileNameForVSCode = language => {
   switch(language) {
-    case ('clj' || 'cljs' || 'cljc' || 'edn' ):
+    case 'clj':
+    case 'cljs':
+    case 'cljc':
+    case 'edn':
       return 'clojure'
-    case ('coffee' || 'coffeelit'):
+    case 'coffee':
+    case 'coffeelit':
       return 'coffeescript'
-    case ('cs'):
+    case 'cs':
       return 'csharp'
-    case ('cc'):
+    case 'cc':
       return 'cpp'
-    case ('f#' || 'fs' || 'fsi' || 'ml' || 'mli' || 'fsx' || 'fsscript'):
+    case 'f#':
+    case 'fs':
+    case 'fsi':
+    case 'ml' :
+    case 'mli':
+    case 'fsx':
+    case 'fsscript':
       return 'fsharp'
-    case ('git' || 'gitcommit' || 'gitrebase'):
+    case 'git':
+    case 'gitcommit':
+    case 'gitrebase':
       return 'git-commit'
-    case ('hbs'):
+    case 'hbs':
       return 'handlebars'
-    case ('js' || 'javascript'):
+    case 'js':
+    case 'javascript':
       return 'javascript'
-    case ('jsx' || 'react'):
+    case 'jsx':
+    case 'react':
       return 'javascriptreact'
-    case ('make'):
+    case 'make':
       return 'makefile'
-    case ('md' || 'markdown' || 'gfm' || 'mark' || 'mkdown' || 'mdml' || 'mdown' || 'mdtext'):
+    case 'md':
+    case 'markdown':
+    case 'gfm':
+    case 'mark':
+    case 'mkdown':
+    case 'mdml':
+    case 'mdown':
+    case 'mdtext':
       return 'markdown'
-    case ('m' || 'h' || 'objc' || 'objective-c' || 'objectivec' || 'oc'):
+    case 'm':
+    case 'h':
+    case 'objc':
+    case 'objective-c':
+    case 'objectivec':
+    case 'oc':
       return 'objective-c'
-    case ('ps1' || 'ps' || 'pwrshell'):
+    case 'ps1':
+    case 'ps':
+    case 'pwrshell':
       return 'powershell'
-    case ('cshtml' || 'vbhtml'):
+    case 'cshtml':
+    case 'vbhtml':
       return 'razor'
-    case ('rb' || 'so' || 'ror' || 'rubyonrails'):
+    case 'rb':
+    case 'so':
+    case 'ror':
+    case 'rubyonrails':
       return 'ruby'
-    case ('sass' || 'scss'):
+    case 'sass':
+    case 'scss':
       return 'scss'
-    case ('sh' || 'bash' || 'shell'):
+    case 'sh':
+    case 'bash':
+    case 'shell':
       return 'shellscript'
-    case ('ts'):
+    case 'ts':
       return 'typescript'
-    case ('yml'):
+    case 'yml':
       return 'yaml'
     default:
       return language

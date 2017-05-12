@@ -1,42 +1,42 @@
 const getExtensionFromVSCodeLanguageScope = (languageScope) => {
   switch(languageScope) {
-    case ('clojure' ):
+    case 'clojure' :
       return 'clj'
-    case ('coffeescript'):
+    case 'coffeescript':
       return 'coffee'
-    case ('csharp'):
+    case 'csharp':
       return 'cs'
-    case ('cpp'):
+    case 'cpp':
       return 'cpp'
-    case ('fsharp'):
+    case 'fsharp':
       return 'fs'
-    case ('git-commit'):
+    case 'git-commit':
       return 'git'
-    case ('handlebars'):
+    case 'handlebars':
       return 'hbs'
-    case ('javascript'):
+    case 'javascript':
       return 'js'
-    case ('javascriptreact'):
+    case 'javascriptreact':
       return 'jsx'
-    case ('makefile'):
+    case 'makefile':
       return 'make'
-    case ('markdown'):
+    case 'markdown':
       return 'md'
-    case ('objective-c'):
+    case 'objective-c':
       return 'objc'
-    case ('powershell'):
+    case 'powershell':
       return 'ps1'
-    case ('razor'):
+    case 'razor':
       return 'cshtml'
-    case ('ruby'):
+    case 'ruby':
       return 'rb'
-    case ('scss'):
+    case 'scss':
       return 'scss'
-    case ('shellscript'):
+    case 'shellscript':
       return 'sh'
-    case ('typescript'):
+    case 'typescript':
       return 'ts'
-    case ('yaml'):
+    case 'yaml':
       return 'yml'
     default:
       return languageScope

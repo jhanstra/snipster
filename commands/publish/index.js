@@ -114,13 +114,26 @@ const addSnippetsToSublime = () => {
 const addSnippetsToEditor = (editor) => {
   editor = editor.toLowerCase()
   switch (editor) {
-    case ('atom' || 'a' || 'atm'):
+    case 'atom':
+    case 'a':
+    case 'atm':
       addSnippetsToAtom()
       break
-    case ('vscode' || 'vs code' || 'code' || 'vs-code' || 'vsc' || 'v' || 'c'):
+    case 'vscode':
+    case 'vs code':
+    case 'code':
+    case 'vs-code':
+    case 'vsc':
+    case 'v':
+    case 'c':
       addSnippetsToVSCode()
       break
-    case ('sublime' || 'subl' || 's' || 'sublime text' || 'sublime text 3' || 'sublime text 2'):
+    case 'sublime':
+    case 'subl':
+    case 's':
+    case 'sublime text':
+    case 'sublime text 3':
+    case 'sublime text 2':
       addSnippetsToSublime()
       break
   }
