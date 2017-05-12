@@ -92,11 +92,19 @@ snipster is not at 1.0 level yet. it has been tested only on the creator's [mach
 
 - `snipster publish`
   - publish all of the snippets in your directory to your text editors. after running this, you should be able to use all of your snippets across any editor.
-  - **options:** [editor(s)] - publish only to certain editors by passing them as arguments, e.g. `snipster publish atom` or `snipster publish code`.
+  - **options:** 
+  - [editor(s)] - *optional* - publish only to certain editors by passing them as arguments, e.g. `snipster publish atom` or `snipster publish code`.
+
+- `snipster add [snippet name]`
+  - add a snippet to your directory from the command line and publish to your editors. this will open your default editor (or vi) where you can write the body of the snippet.
+  - **options:**
+    - [snippet name] - **required** - the prefix and file extension of the snippet to add (e.g. lorem.js)
+    - [path] - *optional* - a folder or path within your snippets directory to place the snippet (e.g. javascript)
 
 - `snipster list`
   - list all of the snippets in your directory.
-  - **options:** [language] - filter by language scope, e.g. `snipster list js` or `snipster list md`.
+  - **options:**
+    - [language] - *optional* - filter by language scope, e.g. `snipster list js` or `snipster list md`.
 
 - `snipster help`
   - alias for `snipster --help`. provides details on how to use snipster.

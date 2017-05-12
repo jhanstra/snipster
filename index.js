@@ -5,6 +5,7 @@ const snipster = require('commander')
 
 const init = require('./commands/init')
 const publish = require('./commands/publish')
+const add = require('./commands/add')
 const list = require('./commands/list')
 const help = require('./commands/help')
 
@@ -22,6 +23,13 @@ snipster
   .description('publish snippets to all editors [or choose which editors to publish to]')
   .action((req, optional) => {
     publish()
+  })
+
+snipster
+  .command('add')
+  .description('set up snipster with your editors and snippets directory')
+  .action((req, optional) => {
+    add()
   })
 
 snipster
