@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('fs-extra')
 const os = require('os')
 const chalk = require('chalk')
 const cson = require('cson')
@@ -47,6 +47,7 @@ const syncSnippetsFromAtom = (userDirectory) => {
   let atomPreSnipsterMap = {}
   try {
     atomPreSnipsterMap = cson.parse(fs.readFileSync(os.homedir() + '/.atom/snippets.cson', 'utf-8'))
+    write.sync(os.homedir() + '/.atom/snippets.cson.snipster-backup-' + Date.now(), fs.readFileSync(os.homedir() + '/.atom/snippets.cson', 'utf-8'))
   } catch(e) {
     console.log(chalk.red("Snipster tried to find your pre-existing Atom snippets, but the snippets file does not exist. Please check that you have Atom installed.\nIf you feel there is an error, please submit an issue to ") + chalk.yellow('https://github.com/jhanstra/snipster/issues.'))
   }
@@ -56,6 +57,10 @@ const syncSnippetsFromAtom = (userDirectory) => {
 const syncSnippetsFromVSCode = (userDirectory) => {
   let vscodePreSnipsterMap = {}
   let files = fs.readdirSync(os.homedir() + '/Library/Application\ Support/Code/User/snippets/')
+
+  /* Create backup folder */
+  fs.copySync(os.homedir() + '/Library/Application\ Support/Code/User/snippets', os.homedir() + '/Library/Application\ Support/Code/User/snipster-backup-' + Date.now())
+
   files.map(file => {
     if (!(file == '.DS_Store')) {
       let language = file.split('.')[0]
