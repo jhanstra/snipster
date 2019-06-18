@@ -3,46 +3,46 @@ const fs = require('fs')
 const os = require('os')
 const inquirer = require('inquirer')
 
+// Just force all snippet files into ~/.snipster, and if the user wants to put them somewhere else, have them symlink it.
+// snipster - if set up, publish. if not, set things up
+// snipster watch - watch the ~/.snipster directory and publish whenever a file changes
+// snipster add - add a new snippet file quickly
+//
+
+
+
 const syncPreExistingSnippets = require('./sync')
 
-const questions = [
-  {
-    type: 'input',
-    name: 'location',
-    message: 'Do you have a snippets directory already? If so, where is it located? (Hint: Navigate to the folder and type `pwd` and copy the result here)'
-  },
-  {
+const init = async () => {
+  let directory = ''
+  chalk.green("🚀 Let's set up your snippets!")
+  const editors = await inquirer.prompt({
     type: 'checkbox',
     name: 'editors',
-    message: 'Which editors would you like to sync with?',
+    message: 'Which editors do you use? (select all that apply)',
     choices: [
       { name: 'vscode' },
       { name: 'atom' },
       { name: 'sublime' },
       { name: 'vim' },
     ],
-  }
-]
-
-const async init = () => {
-  chalk.green("Let's set up your snippets!")
-  const answers = await inquirer.prompt(questions)
-
+  })
 
   answers.editors.map(editor => {
     syncPreExistingSnippets(editor, directory)
   })
 
   /* Store user settings and write to .snipster file in user's home directory */
-  userSettings = {
-    directory: directory,
-    editors: editors
-  }
-  fs.writeFile(os.homedir() + '/.snipster', JSON.stringify(userSettings, null, 2), err => {
+  // userSettings = {
+  //   directory: answers.directory,
+  //   editors: answers.editors
+  // }
+
+  fs.writeFile(os.homedir() + '/.snipster/config.json', JSON.stringify(answers, null, 2), err => {
     if (err) { return console.log(chalk.red(err)) }
     console.log(chalk.green("\nYour information has been saved!"))
     console.log(chalk.green("You now have a single central directory from which to manage your snippets:"))
-    console.log(chalk.white('  ' + userSettings.directory))
+    console.log(chalk.white('  ' + answers.directory))
     console.log(chalk.green("\nYou may organize the snippets in this directory however you'd like."))
     console.log(chalk.green("Add a snippet by creating a new file in your directory:"))
     console.log(chalk.yellow("  snippet prefix == filename"))

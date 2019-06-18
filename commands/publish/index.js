@@ -54,7 +54,7 @@ const addSnippetsToAtom = () => {
     else {
       console.log(chalk.green('🎉 Successfully published your snippets to Atom 🎉'))
     }
-    
+
   })
 }
 
@@ -115,25 +115,12 @@ const addSnippetsToEditor = (editor) => {
   editor = editor.toLowerCase()
   switch (editor) {
     case 'atom':
-    case 'a':
-    case 'atm':
       addSnippetsToAtom()
       break
     case 'vscode':
-    case 'vs code':
-    case 'code':
-    case 'vs-code':
-    case 'vsc':
-    case 'v':
-    case 'c':
       addSnippetsToVSCode()
       break
     case 'sublime':
-    case 'subl':
-    case 's':
-    case 'sublime text':
-    case 'sublime text 3':
-    case 'sublime text 2':
       addSnippetsToSublime()
       break
   }
@@ -159,9 +146,9 @@ const publish = () => {
     let desiredEditors = process.argv.slice(3)
     if (desiredEditors.length != 0) {
       desiredEditors.map(editor => {
-        addSnippetsToEditor(editor) 
+        addSnippetsToEditor(editor)
       })
-    } 
+    }
     /* Else use the editors listed in user's .snipster file */
     else {
       fs.readFile(os.homedir() + '/.snipster', (err, data) => {

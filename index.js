@@ -46,6 +46,4 @@ snipster
     help()
   })
 
-snipster.parse(process.argv); 
-
-  
+snipster.parse(process.argv);
