@@ -27,13 +27,15 @@ const addSnippetToMap = ({language, prefix, body}) => {
     if (snippetMap.hasOwnProperty(language)) {
       snippetMap[language][prefix] = {
         prefix: prefix,
-        body: body
+        body: body,
+        description: description
       }
     } else {
       snippetMap[language] = {}
       snippetMap[language][prefix] = {
         prefix: prefix,
-        body: body
+        body: body,
+        description: description
       }
     }
   })
@@ -72,7 +74,7 @@ const addSnippetsToVSCode = () => {
       const languageName = getLanguageFileNameForVSCode(language)
       let output = vscodeSnipsterComment() + '\n' + JSON.stringify(vscodeSnippetMap[language], null, 2)
       try {
-        fs.writeFileSync(os.homedir() + '/Library/Application\ Support/Code/User/snippets/' + languageName + '.json', output)
+        fs.writeFileSync(os.homedir() + '/AppData/Roaming/Code/User/snippets/' + languageName + '.json', output)
       } catch (e) {
         failedToPublish = true
       }
@@ -149,7 +151,9 @@ const publish = () => {
     snippets.map(s => {
       const snippet = {
         language: s.substring(s.lastIndexOf('.') + 1),
-        prefix: s.substring(s.lastIndexOf('/') + 1, s.lastIndexOf('.')),
+        // prefix: s.substring(s.lastIndexOf('/') + 1, s.lastIndexOf('.')),
+        prefix: s.substring(s.lastIndexOf('/') + 1, s.lastIndexOf('_')),
+        description: s.substring(s.lastIndexOf('_') + 1, s.lastIndexOf('.')),
         body: fs.readFileSync(s, { encoding: 'utf-8'})
       }
       addSnippetToMap(snippet);

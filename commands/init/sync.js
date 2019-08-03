@@ -56,20 +56,20 @@ const syncSnippetsFromAtom = (userDirectory) => {
 
 const syncSnippetsFromVSCode = (userDirectory) => {
   let vscodePreSnipsterMap = {}
-  let files = fs.readdirSync(os.homedir() + '/Library/Application\ Support/Code/User/snippets/')
+  let files = fs.readdirSync(os.homedir() + '/AppData/Roaming/Code/User/snippets/')
 
   /* Create backup folder */
-  fs.copySync(os.homedir() + '/Library/Application\ Support/Code/User/snippets', os.homedir() + '/Library/Application\ Support/Code/User/snipster-backup-' + Date.now())
+  fs.copySync(os.homedir() + '/AppData/Roaming/Code/User/snippets', os.homedir() + '/AppData/Roaming/Code/User/snippets-backup-' + Date.now())
 
   files.map(file => {
     if (!(file == '.DS_Store')) {
       let language = file.split('.')[0]
       try {
-        fileBody = fs.readFileSync(os.homedir() + '/Library/Application\ Support/Code/User/snippets/' + file, 'utf-8')
+        fileBody = fs.readFileSync(os.homedir() + '/AppData/Roaming/Code/User/snippets/' + file, 'utf-8')
         vscodePreSnipsterMap[language] = JSON.parse(stripJsonComments(fileBody))
       } catch(e) {
         console.log(chalk.red("Snipster encountered a problem syncing the file " + file + " from your VSCode snippets. \nCheck that your file is formatted correctly and run ") + chalk.yellow('snipster init') + chalk.red(' again if you wish to try syncing it again.'))
-        console.log('\t' + os.homedir() + '/Library/Application\ Support/Code/User/snippets/' + file + '\n')
+        console.log('\t' + os.homedir() + '/AppData/Roaming/Code/User/snippets/' + file + '\n')
       }
     }
   })
