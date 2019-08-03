@@ -16,19 +16,18 @@ snipster init
 ## how it works
 write snippets as you would normally write code - don't worry about wrangling them into a json or xml object, rewriting them for every text editor you use, quoting every single line, escaping tabs and new lines, indenting, etc. leave all of that complexity for snipster.
 
-1. the name of your snippet file is the prefix you use to call it.
+1. the name of your snippet file is the prefix and the description you use to call it with '_' to separate them.
 2. the file extension of your snippet file is the language scope under which the snippet can be used. get fancy with *multi-scope* extensions like 'html+md+txt' that will make the snippet available to several scopes, or use *named* shortcut extensions like 'all' or 'style' to use the snippet in *all* file types or all similar *style* file types (css, less, scss), respectively.
 3. the content of the file is the snippet body, exactly what will appear when you type the prefix and tab. use tab stop fields ($1, $2) and placeholders (${1:placeholder}) just like you would normally.
 
 ## examples
-for many more examples and inspiration, see the creator's [snippets directory](https://github.com/jhanstra/dotfiles/tree/master/snippets).
 
-**hipsum.md**
+**hipsum_what is this used for.md**
 ```
 Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse.
 ```
 
-**rcc.js**
+**rcc_detail description.js**
 ```
 export default class $1 extends React.Component {
   constructor(props) {
@@ -47,7 +46,7 @@ $1.propTypes = {
 };
 ```
 
-**doctype.html**
+**doctype_more information.html**
 ```
 <!doctype html>
 
@@ -74,11 +73,13 @@ $1.propTypes = {
 ```
 
 ## support
-snipster currently supports [vscode](https://code.visualstudio.com/), [atom](https://atom.io/), and [sublime](https://www.sublimetext.com/) on mac only. support for windows and more editors should be coming soon - suggestions and contributions welcome. 
+This version of snipster currently supports [vscode](https://code.visualstudio.com/), [atom](https://atom.io/), and [sublime](https://www.sublimetext.com/) on windows only.
 
 all language scopes that text editors support are theoretically supported, but please submit issues if any are not working.
 
 ## disclaimer
+snipster in this repo is forked from [jhanstra](https://github.com/jhanstra/snipster).
+
 snipster is not at 1.0 level yet. it has been tested only on the creator's [machine](http://i.memecaptain.com/gend_images/fAu8Pg.png) so far. if you have snippets already in your text editors, it is recommended to back them up before running snipster, just in case. however, snipster also does this backing up and transferring, so if all goes well you shouldn't need to worry about anything. if anything does go wrong for you, please [submit an issue!](https://github.com/jhanstra/snipster/issues/new) :)
 
 <!--## benefits
@@ -147,7 +148,7 @@ let's add a snippet called 'hipsum' which writes hipster-flavored lorem ipsum to
 
 ```
 
-**in snipster** (`hipsum.md`)
+**in snipster** (`hipsum__what is this used for.md`)
 
 after running `snipster publish`, hipsum is available in *[all of our text editors](https://giphy.com/search/mind-blown)*.
 
@@ -158,4 +159,4 @@ Man bun mumblecore bicycle rights next level, distillery scenester fanny pack ar
 ## contribute or donate
 contributions are welcome and enormously helpful. submit [feature ideas](https://github.com/jhanstra/snipster/projects/1), [issues](https://github.com/jhanstra/snipster/issues/new), [pull requests](https://github.com/jhanstra/snipster/pulls), etc. 
 
-if you find value in snipster please feel free to [buy me a ☕](https://www.paypal.me/jhanstra/4) :)
+if you find value in snipster please feel free to [buy jhanstra a ☕](https://www.paypal.me/jhanstra/4) :)

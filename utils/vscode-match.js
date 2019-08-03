@@ -44,6 +44,8 @@ const getLanguageFileNameForVSCode = language => {
     case 'mdtext':
       return 'markdown'
     case 'm':
+    case 'matlab':
+      return 'matlab'
     case 'h':
     case 'objc':
     case 'objective-c':
