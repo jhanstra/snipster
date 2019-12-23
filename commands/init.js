@@ -7,7 +7,7 @@ const os = require('os')
 const syncPreExistingSnippets = require('../utils/sync')
 
 let userSettings = {}
-prompt.message = '
+prompt.message = ''
 
 const init = () => {
   co(function *() {

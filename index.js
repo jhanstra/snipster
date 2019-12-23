@@ -6,6 +6,7 @@ const snipster = require('commander')
 const init = require('./commands/init')
 const initNew = require('./commands/initNew')
 const publish = require('./commands/publish')
+const publishNew = require('./commands/publishNew')
 const add = require('./commands/add')
 const list = require('./commands/list')
 const help = require('./commands/help')
@@ -25,6 +26,7 @@ snipster
   .action((req, optional) => {
     initNew()
   })
+
 snipster
   .command('publish [editor]')
   .description('publish snippets to all editors [or choose which editors to publish to]')
@@ -52,6 +54,10 @@ snipster
   .action((req, optional) => {
     help()
   })
+
+if (!['add', 'init', 'init2', 'publish', 'list', 'help'].includes(process.argv[2])) {
+  publishNew()
+}
 
 snipster.parse(process.argv);
 

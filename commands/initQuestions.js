@@ -2,11 +2,11 @@ const questions = [
   {
     type: 'input',
     name: 'directory',
-    message: `Where would you like to keep your snippets (or where do you keep them now)? Press 'enter' to select current directory`,
+    message: `Enter a pathname to your snippets folder`,
   },
   {
-    type: 'input',
-    name: 'editor
+    type: 'checkbox',
+    name: 'editors',
     message: "Which editors would you like to publish to?",
     choices: [
       { name: 'VSCode', checked: false },

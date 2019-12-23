@@ -6,12 +6,10 @@ const _ = require('lodash')
 const write = require('write')
 const jsontoxml = require('jsontoxml')
 
-const matchers = require('../utils/matchers')
-const comments = require('../utils/comments')
-const utils = require('../utils/general')
-const { atomMatcher, vscodeMatcher, sublimeMatcher } = matchers
-const { atomComment, vscodeComment, sublimeComment } = comments
-const { getFilesInDirectory } = utils
+const init = require('./initNew')
+const { atomMatcher, vscodeMatcher, sublimeMatcher } = require('../utils/matchers')
+const { atomComment, vscodeComment, sublimeComment } = require('../utils/comments')
+const { getFilesInDirectory, homedir, fileExists, parseJsonFile } = require('../utils/general')
 
 let snippetMap = {}
 let atomSnippetMap = {}
@@ -47,11 +45,11 @@ const addSnippetsToAtom = () => {
       atomSnippetMap[languageScope] = languageSnippets
     }
   }
-  let output = atomSnipsterComment() + '\n' + cson.stringify(atomSnippetMap, null, 2)
+  let output = atomComment() + '\n' + cson.stringify(atomSnippetMap, null, 2)
   fs.writeFile(os.homedir() + '/.atom/snippets.cson', output, (err) => {
     if (err) { console.log(chalk.red("Your Atom snippet file doesn't exist where Snipster expected to find it. Please check that you have Atom installed.\nIf you feel there is an error, please submit an issue to ") + chalk.yellow('https://github.com/jhanstra/snipster/issues.'))}
     else {
-      console.log(chalk.green('🎉 Successfully published your snippets to Atom 🎉'))
+      console.log(chalk.green('🎉  Successfully published your snippets to Atom'))
     }
 
   })
@@ -80,7 +78,7 @@ const addSnippetsToVSCode = () => {
   if (failedToPublish) {
     console.log(chalk.red("Your VSCode snippet files do not exist where Snipster expected to find them. Please check that you have VSCode installed.\nIf you feel there is an error, please submit an issue to ") + chalk.yellow('https://github.com/jhanstra/snipster/issues.'))
   } else {
-    console.log(chalk.green('🎉 Successfully published your snippets to VSCode 🎉'))
+    console.log(chalk.green('🎉  Successfully published your snippets to VSCode'))
   }
 }
 
@@ -92,7 +90,7 @@ const addSnippetsToSublime = () => {
       for (let snippet in sublimeSnippetMap[language]) {
         let sublimeSnippet = {snippet: {}}
         sublimeSnippet.snippet.tabTrigger = sublimeSnippetMap[language][snippet].prefix
-        sublimeSnippet.snippet.scope = (language)
+        sublimeSnippet.snippet.scope = sublimeMatcher(language)
         sublimeSnippet.snippet.content = jsontoxml.cdata(sublimeSnippetMap[language][snippet].body)
         let xml = jsontoxml(sublimeSnippet, { prettyPrint: true })
         try {
@@ -106,71 +104,48 @@ const addSnippetsToSublime = () => {
   if (failedToPublish) {
     console.log(chalk.green("Something went wrong while publishing your snippets to Sublime. Please check that you have Sublime installed.\nIf you feel there is an error, please submit an issue to ") + chalk.yellow('https://github.com/jhanstra/snipster/issues.'))
   } else {
-    console.log(chalk.green('🎉 Successfully published your snippets to Sublime 🎉'))
+    console.log(chalk.green('🎉  Successfully published your snippets to Sublime'))
   }
 }
 
 const addSnippetsToEditor = (editor) => {
-  editor = editor.toLowerCase()
   switch (editor) {
-    case 'atom':
-    case 'a':
-    case 'atm':
+    case 'Atom':
       addSnippetsToAtom()
       break
-    case 'vscode':
-    case 'vs code':
-    case 'code':
-    case 'vs-code':
-    case 'vsc':
-    case 'v':
-    case 'c':
+    case 'VSCode':
       addSnippetsToVSCode()
       break
-    case 'sublime':
-    case 'subl':
-    case 's':
-    case 'sublime text':
-    case 'sublime text 3':
-    case 'sublime text 2':
+    case 'Sublime Text':
       addSnippetsToSublime()
       break
   }
 }
 
-const publish = () => {
-  let userSettings = {}
-  fs.readFile(os.homedir() + '/.snipster', (err, data) => {
-    if (err) {return console.log(chalk.red(err)) }
-    else { userSettings = JSON.parse(data) }
-    let snippets = getFilesInDirectory(userSettings.directory)
+const publish = async () => {
+  const settingsFilePath = `${homedir()}/.snipster`
+  let settings
+  if (!fileExists(settingsFilePath)) {
+    console.log('doesnt exist')
+    init()
+    return
+  }
+  settings = await parseJsonFile(settingsFilePath)
+  let snippets = getFilesInDirectory(settings.directory)
 
-    snippets.map(s => {
-      const snippet = {
-        language: s.substring(s.lastIndexOf('.') + 1),
-        prefix: s.substring(s.lastIndexOf('/') + 1, s.lastIndexOf('.')),
-        body: fs.readFileSync(s, { encoding: 'utf-8'})
-      }
-      addSnippetToMap(snippet);
-    })
+  snippets.map(s => {
+    const snippet = {
+      language: s.substring(s.lastIndexOf('.') + 1),
+      prefix: s.substring(s.lastIndexOf('/') + 1, s.lastIndexOf('.')),
+      body: fs.readFileSync(s, { encoding: 'utf-8'})
+    }
+    addSnippetToMap(snippet);
+  })
+  // console.log('snip', snippets)
 
-    /* Handle user-specified editors in command line options */
-    let desiredEditors = process.argv.slice(3)
-    if (desiredEditors.length != 0) {
-      desiredEditors.map(editor => {
-        addSnippetsToEditor(editor)
-      })
-    }
-    /* Else use the editors listed in user's .snipster file */
-    else {
-      fs.readFile(os.homedir() + '/.snipster', (err, data) => {
-        if (err) {return console.log(chalk.red(err)) }
-        else { userSettings = JSON.parse(data) }
-        userSettings.editors.map(editor => {
-          addSnippetsToEditor(editor)
-        })
-      })
-    }
+  let editors = process.argv[3] ? process.argv.slice(3) : settings.editors
+  editors.map(editor => {
+    addSnippetsToEditor(editor)
   })
 }
 

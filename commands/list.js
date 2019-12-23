@@ -2,7 +2,8 @@ const fs = require('fs')
 const os = require('os')
 const columnify = require('columnify')
 
-const getFilesInDirectory = require('../utils/get-files-in-directory')
+const utils = require('../utils/general')
+const { getFilesInDirectory } = utils
 
 const list = () => {
   let userSettings = {}
