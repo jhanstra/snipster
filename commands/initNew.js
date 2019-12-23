@@ -3,7 +3,6 @@ const fs = require('fs-extra')
 const path = require('path')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
-const replace = require('replace')
 const questions = require('./initQuestions')
 const syncPreExistingSnippets = require('../utils/sync')
 
