@@ -4,14 +4,10 @@
 const snipster = require('commander')
 
 const init = require('./commands/init')
-const initNew = require('./commands/initNew')
 const publish = require('./commands/publish')
-const publishNew = require('./commands/publishNew')
 const add = require('./commands/add')
 const list = require('./commands/list')
 const help = require('./commands/help')
-
-snipster.version('0.0.1')
 
 snipster
   .command('init')
@@ -21,14 +17,7 @@ snipster
   })
 
 snipster
-  .command('init2')
-  .description('set up snipster with your editors and snippets directory')
-  .action((req, optional) => {
-    initNew()
-  })
-
-snipster
-  .command('publish [editor]')
+  .command('publish [editors]')
   .description('publish snippets to all editors [or choose which editors to publish to]')
   .action((req, optional) => {
     publish()
@@ -55,8 +44,8 @@ snipster
     help()
   })
 
-if (!['add', 'init', 'init2', 'publish', 'list', 'help'].includes(process.argv[2])) {
-  publishNew()
+if (!['add', 'init', 'publish', 'list', 'help'].includes(process.argv[2])) {
+  publish()
 }
 
 snipster.parse(process.argv);
