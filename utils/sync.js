@@ -6,10 +6,10 @@ const write = require('write')
 const stripJsonComments = require('strip-json-comments')
 const parseString = require('xml2js').parseString
 
-const getExtensionFromAtomLanguageScope = require('../../utils/reverse-atom-match')
-const getExtensionFromVSCodeLanguageScope = require('../../utils/reverse-vscode-match')
-const getExtensionFromSublimeLanguageScope = require('../../utils/reverse-sublime-match')
-const getFilesInDirectory = require('../../utils/get-files-in-directory')
+const getExtensionFromAtomLanguageScope = require('./reverse-atom-match')
+const getExtensionFromVSCodeLanguageScope = require('./reverse-vscode-match')
+const getExtensionFromSublimeLanguageScope = require('./reverse-sublime-match')
+const getFilesInDirectory = require('./get-files-in-directory')
 
 const transferMapToSnipster = (preSnipsterMap, editor, userDirectory) => {
   let snippetFilesSynced = []

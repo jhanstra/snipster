@@ -2,7 +2,7 @@ const fs = require('fs')
 const os = require('os')
 const columnify = require('columnify')
 
-const getFilesInDirectory = require('../../utils/get-files-in-directory')
+const getFilesInDirectory = require('../utils/get-files-in-directory')
 
 const list = () => {
   let userSettings = {}
@@ -26,7 +26,7 @@ const list = () => {
         snippetList[s.substring(s.lastIndexOf('/') + 1, s.lastIndexOf('.'))] = s.substring(s.lastIndexOf('.') + 1)
       })
     }
-    
+
     console.log('\n')
     console.log(columnify(snippetList, {columns: ['Prefix', 'Language scope']}))
   })

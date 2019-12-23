@@ -6,13 +6,13 @@ const _ = require('lodash')
 const write = require('write')
 const jsontoxml = require('jsontoxml')
 
-const getLanguageScopeForAtom = require('../../utils/atom-match')
-const getLanguageFileNameForVSCode = require('../../utils/vscode-match')
-const getLanguageScopeForSublime = require('../../utils/sublime-match')
-const getFilesInDirectory = require('../../utils/get-files-in-directory')
-const atomSnipsterComment = require('../../utils/atom-comment')
-const vscodeSnipsterComment = require('../../utils/vscode-comment')
-const sublimeSnipsterComment = require('../../utils/sublime-comment')
+const getLanguageScopeForAtom = require('../utils/atom-match')
+const getLanguageFileNameForVSCode = require('../utils/vscode-match')
+const getLanguageScopeForSublime = require('../utils/sublime-match')
+const getFilesInDirectory = require('../utils/get-files-in-directory')
+const atomSnipsterComment = require('../utils/atom-comment')
+const vscodeSnipsterComment = require('../utils/vscode-comment')
+const sublimeSnipsterComment = require('../utils/sublime-comment')
 
 let snippetMap = {}
 let atomSnippetMap = {}
@@ -54,7 +54,7 @@ const addSnippetsToAtom = () => {
     else {
       console.log(chalk.green('🎉 Successfully published your snippets to Atom 🎉'))
     }
-    
+
   })
 }
 
@@ -159,9 +159,9 @@ const publish = () => {
     let desiredEditors = process.argv.slice(3)
     if (desiredEditors.length != 0) {
       desiredEditors.map(editor => {
-        addSnippetsToEditor(editor) 
+        addSnippetsToEditor(editor)
       })
-    } 
+    }
     /* Else use the editors listed in user's .snipster file */
     else {
       fs.readFile(os.homedir() + '/.snipster', (err, data) => {
