@@ -8,7 +8,6 @@ const { promisify } = require('util')
 
 // need to promisify async node functions to convert them from callbacks to promises
 const writeFile = promisify(fs.writeFile)
-const readFile = promisify(fs.readFile)
 
 const success = log => console.log(chalk.green(log))
 const fail = log => console.log(chalk.red(log))
@@ -58,8 +57,13 @@ const write = (path, contents) => {
 }
 
 const read = async (path, options) => {
+  const readFile = promisify(fs.readFile)
   try {
     const res = await readFile(path, options)
+    try {
+      const json = JSON.parse(res)
+      return json
+    }
     return res
   } catch (err) {
     fail(err)

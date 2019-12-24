@@ -2,11 +2,12 @@ const fs = require('fs')
 const os = require('os')
 const columnify = require('columnify')
 
-const utils = require('../utils/general')
-const { getFilesInDirectory } = utils
+const { homedir, read, getFilesInDirectory } = require('../utils/general')
 
 const list = () => {
   let userSettings = {}
+  const settings = read(`${homedir()}/.snipster`)
+
   fs.readFile(os.homedir() + '/.snipster', (err, data) => {
     if (err) {return console.log(chalk.red(err)) }
     else { userSettings = JSON.parse(data) }
