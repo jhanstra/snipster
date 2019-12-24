@@ -1,3 +1,4 @@
+// This file is for general utils that can/should be extracted to a separate repo soon
 const process = require('process')
 const os = require('os')
 const fs = require('fs-extra')
@@ -23,7 +24,7 @@ const fileExists = path => {
   return fs.existsSync(path)
 }
 
-const parseJsonFile = async path => {
+const readJson = async path => {
   const readFile = promisify(fs.readFile)
   try {
     const res = await readFile(path)
@@ -47,12 +48,31 @@ const getFilesInDirectory = (dir) => {
   return results;
 }
 
+const write = (path, contents) => {
+  try {
+    writeFile(path, contents)
+    return
+  } catch (err) {
+     fail(err)
+  }
+}
+
+const read = async (path, options) => {
+  try {
+    const res = await readFile(path, options)
+    return res
+  } catch (err) {
+    fail(err)
+  }
+}
 
 module.exports = {
+  read,
+  write,
+  readJson,
   success,
   log,
   homedir,
   fileExists,
-  parseJsonFile,
   getFilesInDirectory,
 }

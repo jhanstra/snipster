@@ -4,3 +4,4 @@
 - [x] check that the script works
 - [] create consts for things
 - [] refactor with the inquirer utils I created
+- [] add config for extensions to use for 'all'

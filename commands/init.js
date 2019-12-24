@@ -3,7 +3,7 @@ const fs = require('fs-extra')
 const path = require('path')
 const inquirer = require('inquirer')
 const syncPreExistingSnippets = require('../utils/sync')
-const { success, log, fileExists, parseJsonFile, homedir } = require('../utils/general')
+const { success, log, fileExists, homedir } = require('../utils/general')
 
 const questions = [
   {
