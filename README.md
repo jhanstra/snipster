@@ -170,6 +170,12 @@ after running `snipster publish`, hipsum is available in _[all of our text edito
 Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse.
 ```
 
+## Scopes
+
+Here are some cheat sheets listing the scopes each editor uses for languages:
+
+- [Sublime](https://gist.github.com/J2TeaM/a54bafb082f90c0f20c9)
+
 ## Contribute
 
 Contributions are welcome and enormously helpful. Submit [feature ideas](https://github.com/jhanstra/snipster/projects/1), [issues](https://github.com/jhanstra/snipster/issues/new), [pull requests](https://github.com/jhanstra/snipster/pulls), etc.

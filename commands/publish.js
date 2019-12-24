@@ -11,7 +11,13 @@ const addSnippetsToEditor = (snippets, editor) => {
     case 'Atom':
       const formatted = {}
       for (let lang in snippets) {
-        formatted[atomMatcher(lang)] = snippets[lang]
+        formatted[atomMatcher(lang)] = {}
+        for (let prefix in snippets[lang]) {
+          formatted[atomMatcher(lang)][prefix] = {
+            prefix,
+            body: snippets[lang][prefix]
+          }
+        }
       }
       write(`${homedir()}/.atom/snippets.cson`, `${atomComment()}\n${cson.stringify(formatted, null, 2)}`)
       break
@@ -31,18 +37,16 @@ const addSnippetsToEditor = (snippets, editor) => {
       break
     case 'Sublime Text':
       for ( let lang in snippets ) {
-        const formatted = {}
         for ( let prefix in snippets[lang] ) {
-          formatted[prefix] = {
+          const snippetObject = {
             snippet: {
               tabTrigger: prefix,
               scope: sublimeMatcher(lang),
               content: jsontoxml.cdata(snippets[lang][prefix])
             }
           }
-          const content = `${sublimeComment()}\n${jsontoxml(formatted, { prettyPrint: true })}`
+          const content = `${sublimeComment()}\n${jsontoxml(snippetObject, { prettyPrint: true })}`
           write(`${SUBLIME_PATH}/${prefix}.sublime-snippet`, content)
-          let sublimeSnippet = {snippet: {}}
         }
       }
       break

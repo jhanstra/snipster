@@ -50,7 +50,7 @@ const getFilesInDirectory = (dir) => {
 
 const write = (path, contents) => {
   try {
-    writeFile(path, contents)
+    fs.writeFileSync(path, contents)
     return
   } catch (err) {
      fail(err)
