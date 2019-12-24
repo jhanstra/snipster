@@ -7,7 +7,6 @@ const { getFilesInDirectory, homedir, fileExists, readJson, write, read } = requ
 const { ATOM_PATH, VSCODE_PATH, SUBLIME_PATH, STYLE_FILE_PATH, ALL_FILE_PATH } = require('../utils/constants')
 
 const addSnippetsToEditor = (snippets, editor) => {
-  console.log('snips', snippets)
   switch (editor) {
     case 'Atom':
       const formatted = {}
@@ -20,7 +19,6 @@ const addSnippetsToEditor = (snippets, editor) => {
       for (let lang in snippets) {
         const formatted = {}
         for (let prefix in snippets[lang]) {
-          console.log('what', snippets[lang][prefix])
           formatted[prefix] = {
             prefix,
             body: snippets[lang][prefix].split('\n'),
