@@ -1,37 +1,15 @@
-const fs = require('fs')
-const os = require('os')
 const columnify = require('columnify')
+const { homedir, read, getFilesInDirectory, log } = require('../utils/general')
 
-const { homedir, read, getFilesInDirectory } = require('../utils/general')
-
-const list = () => {
-  let userSettings = {}
-  const settings = read(`${homedir()}/.snipster`)
-
-  fs.readFile(os.homedir() + '/.snipster', (err, data) => {
-    if (err) {return console.log(chalk.red(err)) }
-    else { userSettings = JSON.parse(data) }
-    let snippets = getFilesInDirectory(userSettings.directory)
-    let desiredScope = process.argv.slice(3)
-    let snippetList = {}
-    if (desiredScope.length != 0) {
-      desiredScope.map(scope => {
-        snippets.map(s => {
-          let snippetScope = s.substring(s.lastIndexOf('.') + 1)
-          if (snippetScope == scope) {
-            snippetList[s.substring(s.lastIndexOf('/') + 1, s.lastIndexOf('.'))] = snippetScope
-          }
-        })
-      })
-    } else {
-      snippets.map(s => {
-        snippetList[s.substring(s.lastIndexOf('/') + 1, s.lastIndexOf('.'))] = s.substring(s.lastIndexOf('.') + 1)
-      })
-    }
-
-    console.log('\n')
-    console.log(columnify(snippetList, {columns: ['Prefix', 'Language scope']}))
-  })
+const list = async () => {
+  const settings = await read(`${homedir()}/.snipster`)
+  const paths = getFilesInDirectory(settings.directory)
+  const snippets = paths.map(path => ({
+      prefix: path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.')),
+      language: path.substring(path.lastIndexOf('.') + 1),
+  }))
+  log()
+  log(columnify(snippets))
 }
 
 module.exports = list

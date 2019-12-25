@@ -3,7 +3,7 @@ const jsontoxml = require('jsontoxml')
 const init = require('./init')
 const { atomMatcher, vscodeMatcher, sublimeMatcher } = require('../utils/matchers')
 const { atomComment, vscodeComment, sublimeComment } = require('../utils/comments')
-const { getFilesInDirectory, homedir, fileExists, readJson, write, read } = require('../utils/general')
+const { getFilesInDirectory, homedir, fileExists, write, read } = require('../utils/general')
 const { ATOM_PATH, VSCODE_PATH, SUBLIME_PATH, STYLE_FILE_PATH, ALL_FILE_PATH } = require('../utils/constants')
 
 const addSnippetsToEditor = (snippets, editor) => {
@@ -57,7 +57,7 @@ const publish = async () => {
   const settingsFilePath = `${homedir()}/.snipster`
   if (!fileExists(settingsFilePath)) { init(); return; }
 
-  const settings = await readJson(settingsFilePath)
+  const settings = await read(settingsFilePath)
   const snipsterFiles = getFilesInDirectory(settings.directory)
 
   const snippets = await snipsterFiles.reduce(async (previousPromise, path) => {

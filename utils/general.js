@@ -23,15 +23,6 @@ const fileExists = path => {
   return fs.existsSync(path)
 }
 
-const readJson = async path => {
-  const readFile = promisify(fs.readFile)
-  try {
-    const res = await readFile(path)
-    return JSON.parse(res)
-  }
-  catch (err) { fail(err) }
-}
-
 const getFilesInDirectory = (dir) => {
   let results = [];
   fs.readdirSync(dir).map(file => {
@@ -63,7 +54,7 @@ const read = async (path, options) => {
     try {
       const json = JSON.parse(res)
       return json
-    }
+    } catch (jsonErr) {}
     return res
   } catch (err) {
     fail(err)
@@ -73,7 +64,6 @@ const read = async (path, options) => {
 module.exports = {
   read,
   write,
-  readJson,
   success,
   log,
   homedir,

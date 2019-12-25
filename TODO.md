@@ -6,7 +6,7 @@
 - [x] check that publish works for Atom
 - [x] check that publish works for Sublime
 - [] clean up 'sync' command like you did 'publish'
-- [] clean up 'list' command
+- [x] clean up 'list' command
 - [] clean up 'help' command
 - [x] create consts for things
 - [] refactor with the inquirer utils I created
@@ -14,6 +14,9 @@
 - [] make sure npm warning on github goes away
 - [x] clean up my own snippets
 - [] create examples folder
+- [] create eslint for node packages
+- [] add that eslint to here
+- [] add publish() command after init() (if init called)
 
 - [] release a new stable version
 - [] tweet about it
