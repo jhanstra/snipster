@@ -6,10 +6,10 @@ const write = require('write')
 const stripJsonComments = require('strip-json-comments')
 const parseString = require('xml2js').parseString
 
-const getExtensionFromAtomLanguageScope = require('../../utils/reverse-atom-match')
-const getExtensionFromVSCodeLanguageScope = require('../../utils/reverse-vscode-match')
-const getExtensionFromSublimeLanguageScope = require('../../utils/reverse-sublime-match')
-const getFilesInDirectory = require('../../utils/get-files-in-directory')
+const getExtensionFromAtomLanguageScope = require('./matchers/reverse-atom-match')
+const getExtensionFromVSCodeLanguageScope = require('./matchers/reverse-vscode-match')
+const getExtensionFromSublimeLanguageScope = require('./matchers/reverse-sublime-match')
+const { getFilesInDirectory } = require('./general')
 
 const transferMapToSnipster = (preSnipsterMap, editor, userDirectory) => {
   let snippetFilesSynced = []
@@ -100,21 +100,13 @@ const syncSnippetsFromSublime = (userDirectory) => {
 const syncPreExistingSnippets = (editor, userDirectory) => {
   editor = editor.toLowerCase()
   switch (editor) {
-    case 'atom':
-    case 'a':
-    case 'atm':
+    case 'Atom':
       syncSnippetsFromAtom(userDirectory)
       break
-    case 'vscode':
-    case 'vs code':
-    case 'code':
-    case 'vs-code':
-    case 'vsc':
-    case 'v':
-    case 'c':
+    case 'VSCode':
       syncSnippetsFromVSCode(userDirectory)
       break
-    case 'sublime':
+    case 'Sublime Text':
       syncSnippetsFromSublime(userDirectory)
       break
   }

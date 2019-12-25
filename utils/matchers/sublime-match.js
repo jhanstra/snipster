@@ -1,4 +1,4 @@
-const getLanguageScopeForSublime = (language) => {
+const sublimeMatch = (language) => {
   switch(language) {
     case 'all':
       return ''
@@ -94,4 +94,4 @@ const getLanguageScopeForSublime = (language) => {
   }
 }
 
-module.exports = getLanguageScopeForSublime
+module.exports = sublimeMatch

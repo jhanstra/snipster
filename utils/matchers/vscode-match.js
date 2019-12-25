@@ -1,4 +1,4 @@
-const getLanguageFileNameForVSCode = language => {
+const vscodeMatch = language => {
   switch(language) {
     case 'clj':
     case 'cljs':
@@ -78,4 +78,4 @@ const getLanguageFileNameForVSCode = language => {
   }
 }
 
-module.exports = getLanguageFileNameForVSCode
+module.exports = vscodeMatch

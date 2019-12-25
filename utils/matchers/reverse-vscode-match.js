@@ -1,4 +1,4 @@
-const getExtensionFromVSCodeLanguageScope = (languageScope) => {
+const reverseVSCodeMatch = (languageScope) => {
   switch(languageScope) {
     case 'clojure' :
       return 'clj'
@@ -43,4 +43,4 @@ const getExtensionFromVSCodeLanguageScope = (languageScope) => {
   }
 }
 
-module.exports = getExtensionFromVSCodeLanguageScope
+module.exports = reverseVSCodeMatch

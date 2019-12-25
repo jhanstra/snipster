@@ -1,4 +1,4 @@
-const getExtensionFromSublimeLanguageScope = (languageScope) => {
+const reverseSublimeMatch = (languageScope) => {
   switch(languageScope) {
     case '':
       return 'all'
@@ -61,4 +61,4 @@ const getExtensionFromSublimeLanguageScope = (languageScope) => {
   }
 }
 
-module.exports = getExtensionFromSublimeLanguageScope
+module.exports = reverseSublimeMatch

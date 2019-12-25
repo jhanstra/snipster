@@ -1,4 +1,4 @@
-const getLanguageScopeForAtom = (language) => {
+const atomMatcher = (language) => {
   switch(language) {
     case 'all':
       return '.text, .source'
@@ -98,4 +98,4 @@ const getLanguageScopeForAtom = (language) => {
   }
 }
 
-module.exports = getLanguageScopeForAtom
+module.exports = atomMatcher

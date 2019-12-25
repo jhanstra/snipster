@@ -1,4 +1,4 @@
-const getExtensionFromAtomLanguageScope = (languageScope) => {
+const reversAtomMatch = (languageScope) => {
   switch(languageScope) {
     case '.text, .source':
       return 'all'
@@ -63,4 +63,4 @@ const getExtensionFromAtomLanguageScope = (languageScope) => {
   }
 }
 
-module.exports = getExtensionFromAtomLanguageScope
+module.exports = reversAtomMatch

@@ -1,0 +1,11 @@
+node_modules/
+.DS_Store
+*.log
+.next/
+.build/
+layout.md
+lerna-debug.log
+.env
+
+
+haters/
