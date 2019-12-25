@@ -7,14 +7,12 @@ Write and arrange snippets _by file_, rather than tediously hand-editing 1000-li
 ## install & set-up
 
 ```
-yarn global add snipster
+npx snipster
 -- or --
-npm install -g snipster
-
-snipster init
-
+yarn global add snipster && snipster
 -- or --
-npx snipster init
+npm install -g snipster && snipster
+-- or --
 ```
 
 ## how it works
