@@ -3,7 +3,7 @@ const jsontoxml = require('jsontoxml')
 const init = require('./init')
 const { atomMatcher, vscodeMatcher, sublimeMatcher } = require('../utils/matchers')
 const { atomComment, vscodeComment, sublimeComment } = require('../utils/comments')
-const { getFilesInDirectory, homedir, fileExists, write, read } = require('../utils/general')
+const { getFilesInDirectory, home, fileExists, write, read } = require('../utils/general')
 const { ATOM_PATH, VSCODE_PATH, SUBLIME_PATH, STYLE_FILE_PATH, ALL_FILE_PATH } = require('../utils/constants')
 
 const addSnippetsToEditor = (snippets, editor) => {
@@ -19,7 +19,7 @@ const addSnippetsToEditor = (snippets, editor) => {
           }
         }
       }
-      write(`${homedir()}/.atom/snippets.cson`, `${atomComment()}\n${cson.stringify(formatted, null, 2)}`)
+      write(`${home()}/.atom/snippets.cson`, `${atomComment()}\n${cson.stringify(formatted, null, 2)}`)
       break
     case 'VSCode':
       for (let lang in snippets) {
@@ -54,7 +54,7 @@ const addSnippetsToEditor = (snippets, editor) => {
 }
 
 const publish = async () => {
-  const settingsFilePath = `${homedir()}/.snipster`
+  const settingsFilePath = `${home()}/.snipster`
   if (!fileExists(settingsFilePath)) { init(); return; }
 
   const settings = await read(settingsFilePath)

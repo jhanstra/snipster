@@ -17,7 +17,7 @@ const log = log => {
   }
   console.log(chalk.white(log)); return
 }
-const homedir = () => os.homedir()
+const home = () => os.homedir()
 
 const fileExists = path => {
   return fs.existsSync(path)
@@ -66,7 +66,7 @@ module.exports = {
   write,
   success,
   log,
-  homedir,
+  home,
   fileExists,
   getFilesInDirectory,
 }

@@ -1,12 +1,7 @@
-const fs = require('fs')
-const os = require('os')
-const chalk = require('chalk')
+const { read, home } = require('../general')
 
-
-const sublimeSnipsterComment = () => {
-  let userSettings = {}
-  let rawData = fs.readFileSync(os.homedir() + '/.snipster')
-  userSettings = JSON.parse(rawData)
+const sublimeComment = async () => {
+  const settings = await read(`${home()}/.snipster`)
   return `
 <!------------------------------------------------------------------------------
 -               _              _                                               -
@@ -21,7 +16,7 @@ const sublimeSnipsterComment = () => {
 -  If you want to continue using Snipster, do not edit your snippets in this   -
 -  file. Rather, add them to your chosen snippets directory:                   -
 -                                                                              -
--    ${userSettings.directory}
+-    ${settings.directory}
 -                                                                              -
 -  Then use 'snipster publish' from the command line to republish.             -
 -                                                                              -
@@ -29,4 +24,4 @@ const sublimeSnipsterComment = () => {
     `
 }
 
-module.exports = sublimeSnipsterComment
+module.exports = sublimeComment

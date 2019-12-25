@@ -3,7 +3,7 @@ const fs = require('fs-extra')
 const path = require('path')
 const inquirer = require('inquirer')
 const syncPreExistingSnippets = require('../utils/sync')
-const { success, log, fileExists, homedir } = require('../utils/general')
+const { success, log, fileExists, home } = require('../utils/general')
 
 const questions = [
   {
@@ -24,7 +24,7 @@ const questions = [
 ]
 
 const initNew = async () => {
-  const settingsFilePath = `${homedir()}/.snipster`
+  const settingsFilePath = `${home()}/.snipster`
   if (fileExists(settingsFilePath)) {
     const answers = await inquirer.prompt([{
       type: 'confirm',
@@ -43,7 +43,7 @@ const initNew = async () => {
     syncPreExistingSnippets(editor, settings.directory)
   })
 
-  fs.writeFile(`${homedir()}/.snipster`, JSON.stringify(settings, null, 2), err => {
+  fs.writeFile(`${home()}/.snipster`, JSON.stringify(settings, null, 2), err => {
     if (err) return chalk.red(err)
     success('Success!')
     log()
