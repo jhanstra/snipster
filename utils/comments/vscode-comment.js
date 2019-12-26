@@ -1,6 +1,6 @@
 const { read, home } = require('../general')
 
-const vscodeComment = () => {
+const vscodeComment = async () => {
   const settings = await read(`${home()}/.snipster`)
   return `
 /*******************************************************************************

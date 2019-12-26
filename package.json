@@ -1,6 +1,6 @@
 {
   "name": "snipster",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A snippets manager for hipsters",
   "main": "index.js",
   "author": "jared hanstra",
