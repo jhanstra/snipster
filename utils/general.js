@@ -1,4 +1,4 @@
-// This file is for general utils that can/should be extracted to a separate repo soon
+// This file is for general node utils that can/should be extracted to a separate repo soon
 const process = require('process')
 const os = require('os')
 const fs = require('fs-extra')
@@ -15,7 +15,7 @@ const log = log => {
   if (typeof log === 'undefined') {
     console.log(); return
   }
-  console.log(chalk.white(log)); return
+  console.log(chalk.yellow(log)); return
 }
 const home = () => os.homedir()
 
@@ -38,7 +38,26 @@ const getFilesInDirectory = (dir) => {
   return results;
 }
 
+const readJson = async path => {
+  const readFile = promisify(fs.readFile)
+  try {
+    const res = await readFile(path)
+    return JSON.parse(res)
+  }
+  catch (err) { fail(err) }
+}
+
 const write = (path, contents) => {
+  const dirPath = path.substring(0, path.lastIndexOf('/'))
+  const file = path.substring(path.lastIndexOf('/') + 1)
+  if (!file) {
+    fail('Write to a file please')
+  }
+  fs.mkdirSync(dirPath, { recursive: true }, (err) => {
+    if (err) {
+      throw err;
+    }
+  });
   try {
     fs.writeFileSync(path, contents)
     return
@@ -63,6 +82,7 @@ const read = async (path, options) => {
 
 module.exports = {
   read,
+  readJson,
   write,
   success,
   log,

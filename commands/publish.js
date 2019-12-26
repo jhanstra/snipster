@@ -6,9 +6,9 @@ const { atomComment, vscodeComment, sublimeComment } = require('../utils/comment
 const { getFilesInDirectory, home, fileExists, write, read } = require('../utils/general')
 const { ATOM_PATH, VSCODE_PATH, SUBLIME_PATH, STYLE_FILE_PATH, ALL_FILE_PATH } = require('../utils/constants')
 
-const addSnippetsToEditor = (snippets, editor) => {
+const addSnippetsToEditor = async (snippets, editor) => {
   switch (editor) {
-    case 'Atom':
+    case 'atom':
       const formatted = {}
       for (let lang in snippets) {
         formatted[atomMatcher(lang)] = {}
@@ -19,9 +19,9 @@ const addSnippetsToEditor = (snippets, editor) => {
           }
         }
       }
-      write(`${home()}/.atom/snippets.cson`, `${atomComment()}\n${cson.stringify(formatted, null, 2)}`)
+      write(`${home()}/.atom/snippets.cson`, `${await atomComment()}\n${cson.stringify(formatted, null, 2)}`)
       break
-    case 'VSCode':
+    case 'vscode':
       for (let lang in snippets) {
         const formatted = {}
         for (let prefix in snippets[lang]) {
@@ -31,11 +31,11 @@ const addSnippetsToEditor = (snippets, editor) => {
           }
         }
         const vscodeLang = vscodeMatcher(lang)
-        const content = `${vscodeComment()}\n${JSON.stringify(formatted, null, 2)}`
+        const content = `${await vscodeComment()}\n${JSON.stringify(formatted, null, 2)}`
         write(`${VSCODE_PATH}/${vscodeLang}.json`, content)
       }
       break
-    case 'Sublime Text':
+    case 'sublime text':
       for ( let lang in snippets ) {
         for ( let prefix in snippets[lang] ) {
           const snippetObject = {
@@ -45,13 +45,14 @@ const addSnippetsToEditor = (snippets, editor) => {
               content: jsontoxml.cdata(snippets[lang][prefix])
             }
           }
-          const content = `${sublimeComment()}\n${jsontoxml(snippetObject, { prettyPrint: true })}`
+          const content = `${await sublimeComment()}\n${jsontoxml(snippetObject, { prettyPrint: true })}`
           write(`${SUBLIME_PATH}/${prefix}.sublime-snippet`, content)
         }
       }
       break
   }
 }
+
 
 const publish = async () => {
   const settingsFilePath = `${home()}/.snipster`
@@ -83,7 +84,7 @@ const publish = async () => {
 
   const editors = process.argv[3] ? process.argv.slice(3) : settings.editors
   editors.map(editor => {
-    addSnippetsToEditor(snippets, editor)
+    addSnippetsToEditor(snippets, editor.toLowerCase())
   })
 }
 

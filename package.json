@@ -15,7 +15,6 @@
     "fs-extra": "^3.0.1",
     "inquirer": "^7.0.1",
     "jsontoxml": "^0.0.11",
-    "lodash": "^4.17.4",
     "prompt": "^1.0.0",
     "strip-json-comments": "^2.0.1",
     "write": "^0.3.3",

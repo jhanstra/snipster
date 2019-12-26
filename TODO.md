@@ -18,6 +18,9 @@
 - [] create eslint for node packages
 - [] add that eslint to here
 - [] add publish() command after init() (if init called)
+- [] make the write util make the directories in between if they don't exist
+- [] improve getFilesFromDirectory - rename, options for recursive vs one level, full path vs file name only
+- [] if a user already has a snippet, don't let them add it
 
 ### Blocked / Later
 
