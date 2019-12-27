@@ -6,9 +6,7 @@ const write = require('write')
 const stripJsonComments = require('strip-json-comments')
 const parseString = require('xml2js').parseString
 
-const getExtensionFromAtomLanguageScope = require('./matchers/reverse-atom-match')
-const getExtensionFromVSCodeLanguageScope = require('./matchers/reverse-vscode-match')
-const getExtensionFromSublimeLanguageScope = require('./matchers/reverse-sublime-match')
+const { reverseAtomMatcher, reverseVscodeMatcher, reverseSublimeMatcher } = require('./matchers')
 const { getFilesInDirectory } = require('./general')
 
 const transferMapToSnipster = (preSnipsterMap, editor, userDirectory) => {
@@ -43,7 +41,8 @@ const transferMapToSnipster = (preSnipsterMap, editor, userDirectory) => {
   return snippetFilesSynced
 }
 
-const syncSnippetsFromAtom = (userDirectory) => {
+const syncAtom = (userDirectory) => {
+  const atomSnippets = read(`${home()/.atom/snippets.cson}`, 'utf-8')
   let atomPreSnipsterMap = {}
   try {
     atomPreSnipsterMap = cson.parse(fs.readFileSync(os.homedir() + '/.atom/snippets.cson', 'utf-8'))
@@ -54,7 +53,7 @@ const syncSnippetsFromAtom = (userDirectory) => {
   let snippetFilesSynced = transferMapToSnipster(atomPreSnipsterMap, 'atom', userDirectory)
 }
 
-const syncSnippetsFromVSCode = (userDirectory) => {
+const syncVscode = (userDirectory) => {
   let vscodePreSnipsterMap = {}
   let files = fs.readdirSync(os.homedir() + '/Library/Application\ Support/Code/User/snippets/')
 
@@ -76,7 +75,7 @@ const syncSnippetsFromVSCode = (userDirectory) => {
   let snippetFilesSynced = transferMapToSnipster(vscodePreSnipsterMap, 'vscode', userDirectory)
 }
 
-const syncSnippetsFromSublime = (userDirectory) => {
+const syncSublime = (userDirectory) => {
   let sublimePreSnipsterMap = {}
   let sublimeSnippetFiles = getFilesInDirectory(os.homedir() + '/Library/Application\ Support/Sublime\ Text\ 3/Packages/User')
   sublimeSnippetFiles.map(file => {
@@ -97,19 +96,19 @@ const syncSnippetsFromSublime = (userDirectory) => {
   let snippetFilesSynced = transferMapToSnipster(sublimePreSnipsterMap, 'sublime', userDirectory)
 }
 
-const syncPreExistingSnippets = (editor, userDirectory) => {
+const sync = (editor, userDirectory) => {
   editor = editor.toLowerCase()
   switch (editor) {
     case 'Atom':
-      syncSnippetsFromAtom(userDirectory)
+      syncAtom(userDirectory)
       break
     case 'VSCode':
-      syncSnippetsFromVSCode(userDirectory)
+      syncVscode(userDirectory)
       break
     case 'Sublime Text':
-      syncSnippetsFromSublime(userDirectory)
+      syncSublime(userDirectory)
       break
   }
 }
 
-module.exports = syncPreExistingSnippets
+module.exports = sync

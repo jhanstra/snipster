@@ -38,15 +38,6 @@ const getFilesInDirectory = (dir) => {
   return results;
 }
 
-const readJson = async path => {
-  const readFile = promisify(fs.readFile)
-  try {
-    const res = await readFile(path)
-    return JSON.parse(res)
-  }
-  catch (err) { fail(err) }
-}
-
 const write = (path, contents) => {
   const dirPath = path.substring(0, path.lastIndexOf('/'))
   const file = path.substring(path.lastIndexOf('/') + 1)
@@ -82,7 +73,6 @@ const read = async (path, options) => {
 
 module.exports = {
   read,
-  readJson,
   write,
   success,
   log,

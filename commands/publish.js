@@ -53,7 +53,6 @@ const addSnippetsToEditor = async (snippets, editor) => {
   }
 }
 
-
 const publish = async () => {
   const settingsFilePath = `${home()}/.snipster`
   if (!fileExists(settingsFilePath)) { init(); return; }
