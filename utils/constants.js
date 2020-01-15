@@ -1,5 +1,7 @@
 const { home } = require('./general')
 
+const SNIPSTER_PATH = `${home()}/snipster`
+const SNIPSTER_CONFIG = `${home()}/snipster/config.json`
 const ATOM_PATH = `${home()}/.atom/snippets.cson`
 const VSCODE_PATH = `${home()}/Library/Application\ Support/Code/User/snippets`
 const SUBLIME_PATH = `${home()}/Library/Application\ Support/Sublime Text 3/Packages/User`
@@ -49,9 +51,11 @@ const LANGUAGES = [
   { name: 'XSL', value: 'xsl' },
   { name: 'YAML', value: 'yaml' },
 ]
-const ALL_FILE_PATH = LANGUAGES.reduce((acc, x)  => `${acc}+${x.value}`, '')
+const ALL_FILE_PATH = LANGUAGES.reduce((acc, x)  => `${acc}+${x.value}`, '').substr(1)
 
 module.exports = {
+  SNIPSTER_PATH,
+  SNIPSTER_CONFIG,
   ATOM_PATH,
   VSCODE_PATH,
   SUBLIME_PATH,

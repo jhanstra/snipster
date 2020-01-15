@@ -2,15 +2,14 @@ const process = require('process')
 const fs = require('fs-extra')
 const path = require('path')
 const inquirer = require('inquirer')
-const syncPreExistingSnippets = require('../utils/sync')
-const { success, log, fileExists, home, write } = require('../utils/general')
+const { success, log, exists, home, write } = require('../utils/general')
+const { LANGUAGES, SNIPSTER_CONFIG } = require('../utils/constants')
 const questions = require('../utils/questions')
-const { LANGUAGES } = require('../utils/constants')
 const add = require('./add')
+const sync = require('./sync')
 
 const init = async () => {
-  const settingsFilePath = `${home()}/.snipster`
-  if (fileExists(settingsFilePath)) {
+  if (exists(SNIPSTER_CONFIG)) {
     const question1 = await inquirer.prompt(questions.initAgain)
     if (!question1.reset) {
       log('Okay, exiting...')
@@ -20,11 +19,9 @@ const init = async () => {
 
   success("🚀  Let's set up Snipster\n")
   const settings = await inquirer.prompt(questions.init)
-  settings.editors.map(editor => {
-    syncPreExistingSnippets(editor, settings.directory)
-  })
+  settings.editors.map(editor => { sync(editor) })
 
-  write(`${home()}/.snipster`, JSON.stringify(settings, null, 2))
+  write(SNIPSTER_CONFIG, JSON.stringify(settings, null, 2))
   success('Success!\n')
   log('Check out https://github.com/jhanstra/snipster/examples for snippet ideas and examples.\n')
   log('You can run `snipster add lorem.md` to add a new snippet.\n')

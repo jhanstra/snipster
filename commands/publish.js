@@ -3,8 +3,8 @@ const jsontoxml = require('jsontoxml')
 const init = require('./init')
 const { atomMatcher, vscodeMatcher, sublimeMatcher } = require('../utils/matchers')
 const { atomComment, vscodeComment, sublimeComment } = require('../utils/comments')
-const { getFilesInDirectory, home, fileExists, write, read } = require('../utils/general')
-const { ATOM_PATH, VSCODE_PATH, SUBLIME_PATH, STYLE_FILE_PATH, ALL_FILE_PATH } = require('../utils/constants')
+const { files, home, exists, write, read } = require('../utils/general')
+const { SNIPSTER_CONFIG, ATOM_PATH, VSCODE_PATH, SUBLIME_PATH, STYLE_FILE_PATH, ALL_FILE_PATH } = require('../utils/constants')
 
 const addSnippetsToEditor = async (snippets, editor) => {
   switch (editor) {
@@ -54,11 +54,11 @@ const addSnippetsToEditor = async (snippets, editor) => {
 }
 
 const publish = async () => {
-  const settingsFilePath = `${home()}/.snipster`
-  if (!fileExists(settingsFilePath)) { init(); return; }
+  if (!exists(SNIPSTER_CONFIG)) { init(); return; }
 
-  const settings = await read(settingsFilePath)
-  const snipsterFiles = getFilesInDirectory(settings.directory)
+  const settings = await read(SNIPSTER_CONFIG)
+  const snipsterFiles = files(settings.directory)
+  console.log('snipfiles', snipsterFiles)
 
   const snippets = await snipsterFiles.reduce(async (previousPromise, path) => {
     const acc = await previousPromise
@@ -66,7 +66,7 @@ const publish = async () => {
       .toLowerCase().replace('style', STYLE_FILE_PATH)
       .replace('all', ALL_FILE_PATH).split('+')
     const prefix = path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.'))
-    const body = await read(path, { encoding: 'utf-8'})
+    const body = await read(path)
 
     // for each language in the extension, add the snippet
     langs.forEach(lang => {

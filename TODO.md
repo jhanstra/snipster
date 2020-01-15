@@ -13,6 +13,8 @@
 - [] show a count of the user's snippets after they add one
 - [] if user doesn't want to give a default snippets dir, make them one
 
+  16.1.20
+
   27.12.19
 
 - [x] (not doing right now) add config for extensions to use for 'all' - ask user which languages they write

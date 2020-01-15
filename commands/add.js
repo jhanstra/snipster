@@ -4,9 +4,10 @@ const inquirer = require('inquirer')
 const publish = require('./publish')
 const questions = require('../utils/questions')
 const { log, read, write, home, fail } = require('../utils/general')
+const { SNIPSTER_CONFIG } = require('../utils/constants')
 
 const add = async () => {
-  const settings = await read(`${home()}/.snipster`)
+  const settings = await read(SNIPSTER_CONFIG)
   let filename, prefix, lang
   if (process.argv.length > 3) {
     filename = process.argv[3]
