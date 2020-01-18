@@ -58,7 +58,6 @@ const publish = async () => {
 
   const settings = await read(SNIPSTER_CONFIG)
   const snipsterFiles = files(settings.directory)
-  console.log('snipfiles', snipsterFiles)
 
   const snippets = await snipsterFiles.reduce(async (previousPromise, path) => {
     const acc = await previousPromise

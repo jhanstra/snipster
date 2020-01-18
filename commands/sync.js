@@ -29,59 +29,56 @@ const sync = async editor => {
   }
   const formatted = {}
   switch (editor) {
-    // case 'Atom':
-    //   try { copy(ATOM_PATH, `${SNIPSTER_PATH}/backups/atom/${Date.now()}`) }
-    //   // copy(ATOM_PATH, `${SNIPSTER_PATH}/backups/atom/${Date.now()}`)
-    //   catch (e) { fail(errorMessage('Atom')) }
-    //   const atomCson = await read(ATOM_PATH)
-    //   const atomJson = cson.parse(atomCson)
-    //   createSnipsterSnippets(atomJson, 'atom')
-    //   break
-    // case 'VSCode':
-    //   try { copy(VSCODE_PATH, `${SNIPSTER_PATH}/backups/vscode/${Date.now()}`) }
-    //   catch (e) { fail(errorMessage('VSCode'))}
-    //   const vscodeFiles = files(VSCODE_PATH, { type: 'filenames' })
-    //   const vscodeFormatted = await vscodeFiles.filter(f => f !== '.DS_Store').reduce(async (previousPromise, file) => {
-    //     const acc = await previousPromise
-    //     const lang = file.split('.')[0]
-    //     acc[lang] = await read(`${VSCODE_PATH}/${file}`)
-    //     return acc
-    //   }, {})
-    //   createSnipsterSnippets(vscodeFormatted, 'vscode')
-    //   break
+    case 'Atom':
+      try { copy(ATOM_PATH, `${SNIPSTER_PATH}/backups/atom/${Date.now()}`) }
+      // copy(ATOM_PATH, `${SNIPSTER_PATH}/backups/atom/${Date.now()}`)
+      catch (e) { fail(errorMessage('Atom')) }
+      const atomCson = await read(ATOM_PATH)
+      const atomJson = cson.parse(atomCson)
+      createSnipsterSnippets(atomJson, 'atom')
+      break
+    case 'VSCode':
+      try { copy(VSCODE_PATH, `${SNIPSTER_PATH}/backups/vscode/${Date.now()}`) }
+      catch (e) { fail(errorMessage('VSCode'))}
+      const vscodeFiles = files(VSCODE_PATH, { type: 'filenames' })
+      const vscodeFormatted = await vscodeFiles.filter(f => f !== '.DS_Store').reduce(async (previousPromise, file) => {
+        const acc = await previousPromise
+        const lang = file.split('.')[0]
+        acc[lang] = await read(`${VSCODE_PATH}/${file}`)
+        return acc
+      }, {})
+      createSnipsterSnippets(vscodeFormatted, 'vscode')
+      break
     case 'Sublime Text':
       try { copy(SUBLIME_PATH, `${SNIPSTER_PATH}/backups/sublime/${Date.now()}`) }
       catch (e) { fail(errorMessage('Sublime Text'))}
       const sublimeFiles = files(SUBLIME_PATH)
-      // sublimeFiles.filter(f => f.includes('sublime-snippet')).map(async file => {
-      //   const body = await read(file)
-      //   parseString(body, (err, { snippet }) => {
-      //     const lang = snippet.hasOwnProperty('scope') && snippet.scope[0] || 'all'
-      //     const prefix = snippet.tabTrigger[0]
-      //     if ( !formatted.hasOwnProperty(lang) ) { formatted[lang] = {} }
-      //     formatted[lang][prefix] = {
-      //       prefix,
-      //       body: snippet.content[0]
-      //     }
-      //   })
-      // })
+      sublimeFiles.filter(f => f.includes('sublime-snippet')).map(async file => {
+        const body = await read(file)
+        parseString(body, (err, { snippet }) => {
+          const lang = snippet.hasOwnProperty('scope') && snippet.scope[0] || 'all'
+          const prefix = snippet.tabTrigger[0]
+          if ( !formatted.hasOwnProperty(lang) ) { formatted[lang] = {} }
+          formatted[lang][prefix] = {
+            prefix,
+            body: snippet.content[0]
+          }
+        })
+      })
       const sublimeFormatted = await sublimeFiles
         .filter(f => f.includes('sublime-snippet'))
         .reduce(async (prevPromise, file) => {
           const acc = await prevPromise
           const body = await read(file)
-          console.log('body', body)
           parseString(body, (err, { snippet }) => {
-            console.log('res', snippet, err)
             const lang = snippet.hasOwnProperty('scope') && snippet.scope[0] || 'all'
             const prefix = snippet.tabTrigger[0]
             if ( !acc.hasOwnProperty(lang) ) { acc[lang] = {} }
-            console.log('content', snippet.content[0])
             acc[lang][prefix] = {
               prefix,
-              body: snippet.content[0].toString()
+              body: snippet.content[0]
             }
-          })
+          }, {})
           return acc
         })
 
