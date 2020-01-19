@@ -2,11 +2,9 @@
 
 ### Text editor snippets are finally easy enough to manage
 
-✅ Add snippets to all of your text editors at once
-
-✅ Add a snippet with a simple command: `npx snipster add <snippet-name>`
-
-✅ Write and arrange your snippets by topic, or any way you wish
+- ✅ Add snippets to all of your text editors at once
+- ✅ Add a snippet with a simple command: `npx snipster add <snippet-name>`
+- ✅ Write and arrange your snippets by topic, or any way you wish
 
 ✅ Keep your snippets in one place, for example in your Dotfiles repo if you have one
 
