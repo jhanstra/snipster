@@ -3,12 +3,12 @@ const jsontoxml = require('jsontoxml')
 const init = require('./init')
 const { atomMatcher, vscodeMatcher, sublimeMatcher } = require('../utils/matchers')
 const { atomComment, vscodeComment, sublimeComment } = require('../utils/comments')
-const { getFilesInDirectory, home, fileExists, write, read } = require('../utils/general')
-const { ATOM_PATH, VSCODE_PATH, SUBLIME_PATH, STYLE_FILE_PATH, ALL_FILE_PATH } = require('../utils/constants')
+const { files, home, exists, write, read } = require('../utils/general')
+const { SNIPSTER_CONFIG, ATOM_PATH, VSCODE_PATH, SUBLIME_PATH, STYLE_FILE_PATH, ALL_FILE_PATH } = require('../utils/constants')
 
-const addSnippetsToEditor = (snippets, editor) => {
+const addSnippetsToEditor = async (snippets, editor) => {
   switch (editor) {
-    case 'Atom':
+    case 'atom':
       const formatted = {}
       for (let lang in snippets) {
         formatted[atomMatcher(lang)] = {}
@@ -19,9 +19,9 @@ const addSnippetsToEditor = (snippets, editor) => {
           }
         }
       }
-      write(`${home()}/.atom/snippets.cson`, `${atomComment()}\n${cson.stringify(formatted, null, 2)}`)
+      write(`${home()}/.atom/snippets.cson`, `${await atomComment()}\n${cson.stringify(formatted, null, 2)}`)
       break
-    case 'VSCode':
+    case 'vscode':
       for (let lang in snippets) {
         const formatted = {}
         for (let prefix in snippets[lang]) {
@@ -31,34 +31,34 @@ const addSnippetsToEditor = (snippets, editor) => {
           }
         }
         const vscodeLang = vscodeMatcher(lang)
-        const content = `${vscodeComment()}\n${JSON.stringify(formatted, null, 2)}`
+        const content = `${await vscodeComment()}\n${JSON.stringify(formatted, null, 2)}`
         write(`${VSCODE_PATH}/${vscodeLang}.json`, content)
       }
       break
-    case 'Sublime Text':
+    case 'sublime text':
       for ( let lang in snippets ) {
         for ( let prefix in snippets[lang] ) {
+          let all = false
+          if (snippets['js'][prefix] && snippets['html'][prefix]) { all = true }
           const snippetObject = {
             snippet: {
               tabTrigger: prefix,
-              scope: sublimeMatcher(lang),
+              scope: all ? sublimeMatcher('all') : sublimeMatcher(lang),
               content: jsontoxml.cdata(snippets[lang][prefix])
             }
           }
-          const content = `${sublimeComment()}\n${jsontoxml(snippetObject, { prettyPrint: true })}`
+          const content = `${await sublimeComment()}\n${jsontoxml(snippetObject, { prettyPrint: true })}`
           write(`${SUBLIME_PATH}/${prefix}.sublime-snippet`, content)
         }
       }
-      break
   }
 }
 
 const publish = async () => {
-  const settingsFilePath = `${home()}/.snipster`
-  if (!fileExists(settingsFilePath)) { init(); return; }
+  if (!exists(SNIPSTER_CONFIG)) { init(); return; }
 
-  const settings = await read(settingsFilePath)
-  const snipsterFiles = getFilesInDirectory(settings.directory)
+  const settings = await read(SNIPSTER_CONFIG)
+  const snipsterFiles = files(settings.directory)
 
   const snippets = await snipsterFiles.reduce(async (previousPromise, path) => {
     const acc = await previousPromise
@@ -66,7 +66,7 @@ const publish = async () => {
       .toLowerCase().replace('style', STYLE_FILE_PATH)
       .replace('all', ALL_FILE_PATH).split('+')
     const prefix = path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.'))
-    const body = await read(path, { encoding: 'utf-8'})
+    const body = await read(path)
 
     // for each language in the extension, add the snippet
     langs.forEach(lang => {
@@ -83,7 +83,7 @@ const publish = async () => {
 
   const editors = process.argv[3] ? process.argv.slice(3) : settings.editors
   editors.map(editor => {
-    addSnippetsToEditor(snippets, editor)
+    addSnippetsToEditor(snippets, editor.toLowerCase())
   })
 }
 

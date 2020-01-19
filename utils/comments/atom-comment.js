@@ -1,7 +1,8 @@
 const { read, home } = require('../general')
+const { SNIPSTER_CONFIG } = require('../constants')
 
 const atomComment = async () => {
-  const settings = await read(`${home()}/.snipster`)
+  const settings = await read(SNIPSTER_CONFIG)
   return `
 ################################################################################
 #               _              _                                               #

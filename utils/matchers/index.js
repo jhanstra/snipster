@@ -2,7 +2,7 @@ const atomMatcher = require('./atom-match')
 const vscodeMatcher = require('./vscode-match')
 const sublimeMatcher = require('./sublime-match')
 const reverseAtomMatcher = require('./reverse-atom-match')
-const reverseVSCodeMatcher = require('./reverse-vscode-match')
+const reverseVscodeMatcher = require('./reverse-vscode-match')
 const reverseSublimeMatcher = require('./reverse-sublime-match')
 
 module.exports = {
@@ -10,6 +10,6 @@ module.exports = {
   vscodeMatcher,
   sublimeMatcher,
   reverseAtomMatcher,
-  reverseVSCodeMatcher,
+  reverseVscodeMatcher,
   reverseSublimeMatcher,
 }

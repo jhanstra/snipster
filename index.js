@@ -6,6 +6,7 @@ const snipster = require('commander')
 const init = require('./commands/init')
 const publish = require('./commands/publish')
 const add = require('./commands/add')
+const sync = require('./commands/sync')
 const list = require('./commands/list')
 const help = require('./commands/help')
 
@@ -31,6 +32,13 @@ snipster
   })
 
 snipster
+  .command('sync')
+  .description('sync pre-existing snippets to Snipster')
+  .action((req, optional) => {
+    sync()
+  })
+
+snipster
   .command('list [scope]')
   .description("list all snippets in user's snippets directory [or filter by language scope]")
   .action((req, optional) => {
@@ -44,7 +52,7 @@ snipster
     help()
   })
 
-if (!['add', 'init', 'publish', 'list', 'help'].includes(process.argv[2])) {
+if (!['add', 'sync', 'init', 'publish', 'list', 'help'].includes(process.argv[2])) {
   publish()
 }
 

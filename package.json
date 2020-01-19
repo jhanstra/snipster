@@ -1,6 +1,6 @@
 {
   "name": "snipster",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A snippets manager for hipsters",
   "main": "index.js",
   "author": "jared hanstra",
@@ -15,11 +15,13 @@
     "fs-extra": "^3.0.1",
     "inquirer": "^7.0.1",
     "jsontoxml": "^0.0.11",
-    "lodash": "^4.17.4",
     "prompt": "^1.0.0",
     "strip-json-comments": "^2.0.1",
     "write": "^0.3.3",
     "xml2js": "^0.4.17"
+  },
+  "scripts": {
+    "reset": "cd ~/Users/jh/Library/Application Support/Sublime Text 3/Packages/User"
   },
   "bin": {
     "snipster": "./index.js"

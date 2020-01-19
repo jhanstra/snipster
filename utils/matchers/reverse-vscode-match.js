@@ -1,4 +1,4 @@
-const reverseVSCodeMatch = (languageScope) => {
+const reverseVscodeMatch = (languageScope) => {
   switch(languageScope) {
     case 'clojure' :
       return 'clj'
@@ -43,4 +43,4 @@ const reverseVSCodeMatch = (languageScope) => {
   }
 }
 
-module.exports = reverseVSCodeMatch
+module.exports = reverseVscodeMatch

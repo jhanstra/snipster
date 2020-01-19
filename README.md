@@ -1,4 +1,4 @@
-# Snipster
+# ✂️ Snipster
 
 ### Publish all of your snippets to all of your editors with one command.
 
