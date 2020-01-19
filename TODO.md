@@ -1,6 +1,5 @@
 # TODO
 
-- []-(3) clean up 'sync' command like you did 'publish'
 - [] make sure npm warning on github goes away
 - [] create examples folder
 - [] create eslint for node packages
@@ -13,7 +12,9 @@
 - [] show a count of the user's snippets after they add one
 - [] if user doesn't want to give a default snippets dir, make them one
 
-  16.1.20
+  18.1.20
+
+- [x]-(3) clean up 'sync' command like you did 'publish'
 
   27.12.19
 

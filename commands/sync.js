@@ -6,6 +6,7 @@ const { reverseAtomMatcher, reverseVscodeMatcher, reverseSublimeMatcher } = requ
 
 const createSnipsterSnippets = async (snippetsJson, editor) => {
   const settings = await read(SNIPSTER_CONFIG)
+  if (typeof snippetsJson !== 'object') { return null }
   for (let lang in snippetsJson) {
     let extension
     if (editor == 'atom') { extension = reverseAtomMatcher(lang) }
@@ -52,35 +53,23 @@ const sync = async editor => {
     case 'Sublime Text':
       try { copy(SUBLIME_PATH, `${SNIPSTER_PATH}/backups/sublime/${Date.now()}`) }
       catch (e) { fail(errorMessage('Sublime Text'))}
-      const sublimeFiles = files(SUBLIME_PATH)
-      sublimeFiles.filter(f => f.includes('sublime-snippet')).map(async file => {
-        const body = await read(file)
-        parseString(body, (err, { snippet }) => {
-          const lang = snippet.hasOwnProperty('scope') && snippet.scope[0] || 'all'
-          const prefix = snippet.tabTrigger[0]
-          if ( !formatted.hasOwnProperty(lang) ) { formatted[lang] = {} }
-          formatted[lang][prefix] = {
-            prefix,
-            body: snippet.content[0]
-          }
-        })
-      })
+      const sublimeFiles = files(SUBLIME_PATH, { type: 'filenames' })
       const sublimeFormatted = await sublimeFiles
         .filter(f => f.includes('sublime-snippet'))
         .reduce(async (prevPromise, file) => {
           const acc = await prevPromise
-          const body = await read(file)
+          const body = await read(`${SUBLIME_PATH}/${file}`)
           parseString(body, (err, { snippet }) => {
-            const lang = snippet.hasOwnProperty('scope') && snippet.scope[0] || 'all'
+            const lang = (snippet.hasOwnProperty('scope') && snippet.scope[0]) || 'all'
             const prefix = snippet.tabTrigger[0]
             if ( !acc.hasOwnProperty(lang) ) { acc[lang] = {} }
             acc[lang][prefix] = {
               prefix,
               body: snippet.content[0]
             }
-          }, {})
+          })
           return acc
-        })
+        }, {})
 
       createSnipsterSnippets(sublimeFormatted, 'sublime')
       break

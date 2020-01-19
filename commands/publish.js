@@ -38,10 +38,12 @@ const addSnippetsToEditor = async (snippets, editor) => {
     case 'sublime text':
       for ( let lang in snippets ) {
         for ( let prefix in snippets[lang] ) {
+          let all = false
+          if (snippets['js'][prefix] && snippets['html'][prefix]) { all = true }
           const snippetObject = {
             snippet: {
               tabTrigger: prefix,
-              scope: sublimeMatcher(lang),
+              scope: all ? sublimeMatcher('all') : sublimeMatcher(lang),
               content: jsontoxml.cdata(snippets[lang][prefix])
             }
           }
@@ -49,7 +51,6 @@ const addSnippetsToEditor = async (snippets, editor) => {
           write(`${SUBLIME_PATH}/${prefix}.sublime-snippet`, content)
         }
       }
-      break
   }
 }
 
