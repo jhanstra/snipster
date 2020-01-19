@@ -2,17 +2,27 @@
 
 ### Text editor snippets are finally easy enough to manage
 
-✅Add snippets to all of your text editors at once
-✅Add a snippet with a simple command: `npx snipster add <snippet-name>`
-✅Write and arrange your snippets by topic, or any way you wish
-✅Keep your snippets in one place, for example in your Dotfiles repo if you have one
-✅Make a snippet available in all language scopes by using the special `.all` extension
-✅Support for tabstops and placeholders
-✅Sync your pre-existing snippets to Snipster
-✅Migrate from one editor to another easily with Snipster
-🙅‍♀️No more hand-editing 1000-line JSON/CSON/XML files
-🙅‍♀️No more looking up the language scope keyword for each editor
-🙅‍♀️No more quoting every line of the snippet, escaping characters, or arranging the lines in an array
+✅ Add snippets to all of your text editors at once
+
+✅ Add a snippet with a simple command: `npx snipster add <snippet-name>`
+
+✅ Write and arrange your snippets by topic, or any way you wish
+
+✅ Keep your snippets in one place, for example in your Dotfiles repo if you have one
+
+✅ Make a snippet available in all language scopes by using the special `.all` extension
+
+✅ Support for tabstops and placeholders
+
+✅ Sync your pre-existing snippets to Snipster
+
+✅ Migrate from one editor to another easily with Snipster
+
+🙅‍♀️ No more hand-editing 1000-line JSON/CSON/XML files
+
+🙅‍♀️ No more looking up the language scope keyword for each editor
+
+🙅‍♀️ No more quoting every line of the snippet, escaping characters, or arranging the lines in an array
 
 ## Install & Set-up
 
