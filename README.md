@@ -1,10 +1,20 @@
 # ✂️ Snipster
 
-### Publish all of your snippets to all of your editors with one command.
+### Text editor snippets are finally easy enough to manage
 
-Write and arrange snippets _by file_, rather than tediously hand-editing 1000-line json/cson/xml files. No meta content.
+✅Add snippets to all of your text editors at once
+✅Add a snippet with a simple command: `npx snipster add <snippet-name>`
+✅Write and arrange your snippets by topic, or any way you wish
+✅Keep your snippets in one place, for example in your Dotfiles repo if you have one
+✅Make a snippet available in all language scopes by using the special `.all` extension
+✅Support for tabstops and placeholders
+✅Sync your pre-existing snippets to Snipster
+✅Migrate from one editor to another easily with Snipster
+🙅‍♀️No more hand-editing 1000-line JSON/CSON/XML files
+🙅‍♀️No more looking up the language scope keyword for each editor
+🙅‍♀️No more quoting every line of the snippet, escaping characters, or arranging the lines in an array
 
-## Install & set-up
+## Install & Set-up
 
 ```
 npx snipster
@@ -16,15 +26,17 @@ npm install -g snipster && snipster
 
 ## How It Works
 
-Write snippets as you would normally write code - don't worry about wrangling them into a json or xml object, rewriting them for every text editor you use, quoting every single line, escaping tabs and new lines, indenting, etc. Leave all of that complexity for snipster.
+Write snippets as you would normally write code - don't worry about wrangling them into a json or xml object, rewriting them for every text editor you use, quoting every single line, escaping tabs and new lines, indenting, etc. Leave all of that complexity for Snipster.
 
-1. The name of your snippet file is the prefix you use to call it when writing code.
-2. The file extension of your snippet file is the language scope under which the snippet can be used. Get fancy with _multi-scope_ extensions like 'html+md+txt' that will make the snippet available to several scopes, or use _named_ shortcut extensions like 'all' or 'style' to use the snippet in _all_ file types or all similar _style_ file types (css, less, scss), respectively.
-3. The content of the file is the snippet body, exactly what will appear when you type the prefix and tab. Use tab stop fields ($1, $2) and placeholders (\${1:placeholder}) just like you would normally.
+1. The **name** of your snippet file is the **prefix** you use to call it when writing code.
+2. The **file extension** of your snippet file is the **language scope** under which the snippet can be used. Get fancy with _multi-scope_ extensions like 'html+md+txt' that will make the snippet available to several scopes, or use _named_ shortcut extensions like 'all' or 'style' to use the snippet in _all_ file types or all similar _style_ file types (css, less, scss), respectively.
+3. The **content** of the file is the **snippet body**, exactly what will appear when you type the prefix and tab. You can use tab stop fields ($1, $2) and placeholders (\${1:placeholder}) to give yourself blocks to tab to while using a snippet.
+
+- Snipster gives you a much easier snippet editing experience. Simply run `npx snipster add` from any folder to add a snippet to all of your editors at once, or open your snippets directory and create a file. No more editing json, cson, or xml files and escaping characters. What you see is what you get.
 
 ## Examples
 
-For many more examples and inspiration, see the creator's [snippets directory](https://github.com/jhanstra/dotfiles/tree/master/snippets).
+Here are a few examples of Snipster files and content. For more examples and inspiration, see the [example directory](https://github.com/jhanstra/snipster/tree/master/examples) or the creator's [snippets directory](https://github.com/jhanstra/dotfiles/tree/master/snippets).
 
 **rc.js**
 
@@ -85,41 +97,23 @@ Man bun mumblecore bicycle rights next level, distillery scenester fanny pack ar
 
 ## Editor Support
 
-Snipster currently supports [VSCode](https://code.visualstudio.com/), [Atom](https://atom.io/), and [Sublime](https://www.sublimetext.com/) on Mac only. Support for Windows and more editors may come at some point, but PRs are welcome.
-
-## Disclaimer
-
-Snipster is not at 1.0 level yet. It has been tested only on the creator's [machine](http://i.memecaptain.com/gend_images/fAu8Pg.png) so far. If you have snippets already in your text editors, it is recommended to back them up before running snipster, just in case. However, snipster also does this backing up and transferring, so if all goes well you shouldn't need to worry about anything. If anything does go wrong for you, please [submit an issue!](https://github.com/jhanstra/snipster/issues/new) :)
+Snipster currently supports [VSCode](https://code.visualstudio.com/), [Atom](https://atom.io/), and [Sublime](https://www.sublimetext.com/) on Mac only. Support for Windows and more editors may come at some point, but PRs are welcome. Sublime does not yet support `.style` or custom extensions like `js+html`.
 
 ## API
 
-- `snipster init`: Get set up with snipster by telling it where your snippets are and which text editors you use. Snipster will transfer over your editors' pre-existing snippets.
+- `snipster init`: Get set up with snipster by telling it where your snippets are (or where you would like them to be located) and which text editors you use. Snipster will transfer over your editors' pre-existing snippets to your new snippets directory.
 
-- `snipster publish`: Publish all of the snippets in your directory to your text editors. After running this, you should be able to use all of your snippets across any editor.
+- `snipster publish [editor(s)]`: Publish all of the snippets in your directory to your text editors. After running this, you should be able to use all of your snippets across any editor.
 
-  - **options:**
-  - [editor(s)] - _optional_ - publish only to certain editors by passing them as arguments, e.g. `snipster publish atom` or `snipster publish code`.
+- `snipster add [snippet name]`: Add a snippet to your directory from the command line and publish to your editors. This will open Vim where you can write the body of the snippet.
 
-- `snipster add [snippet name]`
+- `snipster list`: List all of the snippets in your directory.
 
-  - add a snippet to your directory from the command line and publish to your editors. this will open your default editor (or vi) where you can write the body of the snippet.
-  - **options:**
-    - [snippet name] - **required** - the prefix and file extension of the snippet to add (e.g. lorem.js)
-    - [path] - _optional_ - a folder or path within your snippets directory to place the snippet (e.g. javascript)
-
-- `snipster list`
-
-  - list all of the snippets in your directory.
-  - **options:**
-    - [language] - _optional_ - filter by language scope, e.g. `snipster list js` or `snipster list md`.
-
-- `snipster help`
-
-  - alias for `snipster --help`. provides details on how to use snipster.
+- `snipster help`: Alias for `snipster --help`. provides details on how to use snipster.
 
 - list of named extensions:
   - **all**: all languages
-  - **style**: css + scss + less
+  - **style**: css + scss + less + js + jsx + ts + tsx
 
 ## Comparison
 
@@ -167,14 +161,14 @@ after running `snipster publish`, hipsum is available in _[all of our text edito
 Man bun mumblecore bicycle rights next level, distillery scenester fanny pack art party master cleanse.
 ```
 
-## Scopes
+Note that if you want to add this snippet to all of your editors, it's a nightmare. Each editor uses a different config language (JSON, CSON, XML) **and** different property names. Additionally, VSCode requires you to write each line as an item in an array while Atom doesn't, and Sublime requires you to use CDATA since it's XML. In Sublime, you need to look up the correct scope to use, which is the nonintuitive `text.html.markdown`. In Atom, it's `gfm`.
 
-Here are some cheat sheets listing the scopes each editor uses for languages:
+## Migrating Between Editors
 
-- [Sublime](https://gist.github.com/J2TeaM/a54bafb082f90c0f20c9)
+Migrating from one editor to another can be a monumental, day- or week- long task. Snipster helps you out by providing an agnostic solution that can ship your snippets to all of your editors.
 
 ## Contribute
 
-Contributions are welcome and enormously helpful. Submit [feature ideas](https://github.com/jhanstra/snipster/projects/1), [issues](https://github.com/jhanstra/snipster/issues/new), [pull requests](https://github.com/jhanstra/snipster/pulls), etc.
+Contributions are welcome and very helpful. Submit [feature ideas](https://github.com/jhanstra/snipster/projects/1), [issues](https://github.com/jhanstra/snipster/issues/new), [pull requests](https://github.com/jhanstra/snipster/pulls), etc.
 
 If you find value in snipster please feel free to [buy me a ☕](https://www.paypal.me/jhanstra/4) :)

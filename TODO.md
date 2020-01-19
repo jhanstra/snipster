@@ -1,6 +1,5 @@
 # TODO
 
-- [] create examples folder
 - [] create eslint for node packages
 - [] add that eslint to here
 - [] add publish() command after init() (if init called)
@@ -15,6 +14,7 @@
 
 - [x]-(3) clean up 'sync' command like you did 'publish'
 - [x] make sure npm warning on github goes away
+- [x] create examples folder
 
   27.12.19
 

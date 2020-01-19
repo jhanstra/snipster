@@ -5,7 +5,7 @@ const SNIPSTER_CONFIG = `${home()}/snipster/config.json`
 const ATOM_PATH = `${home()}/.atom/snippets.cson`
 const VSCODE_PATH = `${home()}/Library/Application\ Support/Code/User/snippets`
 const SUBLIME_PATH = `${home()}/Library/Application\ Support/Sublime Text 3/Packages/User`
-const STYLE_FILE_PATH = 'css+scss+less+js'
+const STYLE_FILE_PATH = 'css+scss+less+js+jsx+ts+tsx'
 const LANGUAGES = [
   { name: 'C', value: 'c' },
   { name: 'Clojure', value: 'clj' },
