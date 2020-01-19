@@ -1,6 +1,5 @@
 # TODO
 
-- [] make sure npm warning on github goes away
 - [] create examples folder
 - [] create eslint for node packages
 - [] add that eslint to here
@@ -15,6 +14,7 @@
   18.1.20
 
 - [x]-(3) clean up 'sync' command like you did 'publish'
+- [x] make sure npm warning on github goes away
 
   27.12.19
 

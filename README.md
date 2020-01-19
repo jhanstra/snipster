@@ -4,7 +4,7 @@
 
 Write and arrange snippets _by file_, rather than tediously hand-editing 1000-line json/cson/xml files. No meta content.
 
-## install & set-up
+## Install & set-up
 
 ```
 npx snipster
@@ -12,10 +12,9 @@ npx snipster
 yarn global add snipster && snipster
 -- or --
 npm install -g snipster && snipster
--- or --
 ```
 
-## how it works
+## How It Works
 
 Write snippets as you would normally write code - don't worry about wrangling them into a json or xml object, rewriting them for every text editor you use, quoting every single line, escaping tabs and new lines, indenting, etc. Leave all of that complexity for snipster.
 
