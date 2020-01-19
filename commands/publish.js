@@ -81,7 +81,9 @@ const publish = async () => {
     return acc
   }, {})
 
-  const editors = process.argv[3] ? process.argv.slice(3) : settings.editors
+  let editors = process.argv[3] ? process.argv.slice(3) : settings.editors
+  // when coming from the 'add' command, use all editors
+  if (process.argv[2] && process.argv[2] === 'add') { editors = settings.editors }
   editors.map(editor => {
     addSnippetsToEditor(snippets, editor.toLowerCase())
   })

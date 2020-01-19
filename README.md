@@ -1,6 +1,6 @@
 # ✂️ Snipster
 
-### Text editor snippets are finally easy enough to manage
+### Text editor snippets are finally easy enough to manage.
 
 - ✅ Add snippets to all of your text editors at once
 - ✅ Add a snippet with a simple command: `npx snipster add <snippet-name>`
@@ -29,10 +29,10 @@ npm install -g snipster && snipster
 Write snippets as you would normally write code - don't worry about wrangling them into a json or xml object, rewriting them for every text editor you use, quoting every single line, escaping tabs and new lines, indenting, etc. Leave all of that complexity for Snipster.
 
 1. The **name** of your snippet file is the **prefix** you use to call it when writing code.
-2. The **file extension** of your snippet file is the **language scope** under which the snippet can be used. Get fancy with _multi-scope_ extensions like 'html+md+txt' that will make the snippet available to several scopes, or use _named_ shortcut extensions like 'all' or 'style' to use the snippet in _all_ file types or all similar _style_ file types (css, less, scss), respectively.
+2. The **file extension** of your snippet file is the **language scope** under which the snippet can be used. Get fancy with _multi-scope_ extensions like 'html+md+txt' that will make the snippet available to several scopes, or use _named_ shortcut extensions like 'all' or 'style' to use the snippet in _all_ file types or all similar _style_ file types (css, less, scss, stylus, etc), respectively.
 3. The **content** of the file is the **snippet body**, exactly what will appear when you type the prefix and tab. You can use tab stop fields ($1, $2) and placeholders (\${1:placeholder}) to give yourself blocks to tab to while using a snippet.
 
-- Snipster gives you a much easier snippet editing experience. Simply run `npx snipster add` from any folder to add a snippet to all of your editors at once, or open your snippets directory and create a file. No more editing json, cson, or xml files and escaping characters. What you see is what you get.
+Snipster gives you a much easier snippet editing experience. Simply run `npx snipster add` from any folder to add a snippet to all of your editors at once, or open your snippets directory and create a file. No more editing json, cson, or xml files and escaping characters. What you see is what you get.
 
 ## Examples
 
@@ -97,7 +97,7 @@ Man bun mumblecore bicycle rights next level, distillery scenester fanny pack ar
 
 ## Editor Support
 
-Snipster currently supports [VSCode](https://code.visualstudio.com/), [Atom](https://atom.io/), and [Sublime](https://www.sublimetext.com/) on Mac only. Support for Windows and more editors may come at some point, but PRs are welcome. Sublime does not yet support `.style` or custom extensions like `js+html`.
+Snipster currently supports [VSCode](https://code.visualstudio.com/), [Atom](https://atom.io/), and [Sublime](https://www.sublimetext.com/) on Mac only. Support for Windows and more editors may come at some point, but PRs are welcome. Sublime does not yet support `.style` or multi-scope extensions like `.js+html`.
 
 ## API
 
@@ -117,7 +117,7 @@ Snipster currently supports [VSCode](https://code.visualstudio.com/), [Atom](htt
 
 ## Comparison
 
-To see how much code Snipster helps you save, let's add a snippet called 'hipsum' which writes hipster-flavored lorem ipsum to our editor inside **markdown** files only. In each of these editors we have to first track down the correct file, then add the following code to it. (Comments are added to point out other issues with snippets).
+To see how much code Snipster helps you save, let's add a snippet called 'hipsum' which writes hipster-flavored lorem ipsum to our editor inside **markdown** files only. In each of these editors we have to first track down the correct file, then add the following code to it.
 
 **In VSCode** (`code/user/snippets/markdown.json`)
 

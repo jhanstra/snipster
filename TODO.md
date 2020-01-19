@@ -3,18 +3,20 @@
 - [] create eslint for node packages
 - [] add that eslint to here
 - [] add publish() command after init() (if init called)
-- [] improve getFilesFromDirectory - rename, options for recursive vs one level, full path vs file name only
 - [] if a user already has a snippet, don't let them add it
 - [] user should be able to go from zero to set up just with `npx snipster`
 - [] allow user to give the pathname from their personal root
 - [] show a count of the user's snippets after they add one
 - [] if user doesn't want to give a default snippets dir, make them one
+- [] allow user to open their chosen editor to add a snippet
 
   18.1.20
 
 - [x]-(3) clean up 'sync' command like you did 'publish'
 - [x] make sure npm warning on github goes away
 - [x] create examples folder
+- [x] improve getFilesFromDirectory - rename, options for recursive vs one level, full path vs file name only
+- [x] fix 'add' command when given an argument
 
   27.12.19
 
@@ -44,5 +46,3 @@
 ### Blocked / Later
 
 - [] refactor with the inquirer utils I created
-- [] release a new stable version
-- [] tweet about it

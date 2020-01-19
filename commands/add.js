@@ -11,22 +11,19 @@ const add = async () => {
   let filename, prefix, lang
   if (process.argv.length > 3) {
     filename = process.argv[3]
-    prefix = filename.split('.')[0]
-    lang = filename.split('.')[1]
   } else {
     log('\n✂️  Add a snippet:')
     const question1 = await inquirer.prompt(questions.add)
-    filename = `${question1.prefix}.${question1.langs}`
+    const filename = `${question1.prefix}.${question1.langs}`
   }
 
-  const editor = process.env.EDITOR || 'vi'
-  const child = child_process.spawn(editor, [`/tmp/${filename}`], {
+  const child = child_process.spawn('vim', [`/tmp/${filename}`], {
     stdio: 'inherit'
   })
   child.on('exit', async function (e, code) {
     if (e) { fail(e) }
     const contents = await read(`/tmp/${filename}`)
-    const file = await write(`${settings.directory}/added/${filename}`, contents)
+    const file = write(`${settings.directory}/added/${filename}`, contents)
     const published = await publish()
     const question2 = await inquirer.prompt(questions.more)
       if (!question2.more) {
