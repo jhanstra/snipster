@@ -1,5 +1,7 @@
 # ✂️ Snipster
 
+test
+
 ### Text editor snippets are finally easy enough to manage.
 
 - ✅ Add snippets to all of your text editors at once
