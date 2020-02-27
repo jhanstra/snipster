@@ -1,6 +1,7 @@
 # TODO
 
-- [] create eslint for node packages
+- [] fix sublime sync/publish issues
+- []+3 create eslint for node packages
 - [] add that eslint to here
 - [] add publish() command after init() (if init called)
 - [] if a user already has a snippet, don't let them add it
@@ -12,7 +13,7 @@
 
   18.1.20
 
-- [x]-(3) clean up 'sync' command like you did 'publish'
+- [x]+3 clean up 'sync' command like you did 'publish'
 - [x] make sure npm warning on github goes away
 - [x] create examples folder
 - [x] improve getFilesFromDirectory - rename, options for recursive vs one level, full path vs file name only

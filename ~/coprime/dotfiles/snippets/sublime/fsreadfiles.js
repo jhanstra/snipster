@@ -1,0 +1,1 @@
+fs.readFileSync(${1:path}, 'utf-8')

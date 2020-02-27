@@ -3,7 +3,7 @@ const { ALL_SUBLIME } = require('../constants')
 const sublimeMatch = (language) => {
   switch(language) {
     case 'all':
-      return ALL_SUBLIME
+      return ''
     case 'clj':
     case 'cljs':
     case 'cljc':

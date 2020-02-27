@@ -1,9 +1,10 @@
 const cson = require('cson')
 const jsontoxml = require('jsontoxml')
-const init = require('./init')
+// const init = require('./init')
+const add = require('./add')
 const { atomMatcher, vscodeMatcher, sublimeMatcher } = require('../utils/matchers')
 const { atomComment, vscodeComment, sublimeComment } = require('../utils/comments')
-const { files, home, exists, write, read } = require('../utils/general')
+const { files, home, exists, write, read, log } = require('../utils/general')
 const { SNIPSTER_CONFIG, ATOM_PATH, VSCODE_PATH, SUBLIME_PATH, STYLE_FILE_PATH, ALL_FILE_PATH } = require('../utils/constants')
 
 const addSnippetsToEditor = async (snippets, editor) => {
@@ -55,7 +56,9 @@ const addSnippetsToEditor = async (snippets, editor) => {
 }
 
 const publish = async () => {
-  if (!exists(SNIPSTER_CONFIG)) { init(); return; }
+  if (!exists(SNIPSTER_CONFIG)) {
+    log('Please set up Snipster with `npx snipster init`'); return;
+  }
 
   const settings = await read(SNIPSTER_CONFIG)
   const snipsterFiles = files(settings.directory)

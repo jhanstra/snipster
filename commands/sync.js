@@ -59,7 +59,8 @@ const sync = async editor => {
         .reduce(async (prevPromise, file) => {
           const acc = await prevPromise
           const body = await read(`${SUBLIME_PATH}/${file}`)
-          parseString(body, (err, { snippet }) => {
+          parseString(body, (err, res) => {
+            const { snippet } = res
             const lang = (snippet.hasOwnProperty('scope') && snippet.scope[0]) || 'all'
             const prefix = snippet.tabTrigger[0]
             if ( !acc.hasOwnProperty(lang) ) { acc[lang] = {} }

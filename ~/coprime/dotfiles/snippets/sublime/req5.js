@@ -1,0 +1,5 @@
+const $1 = require('$1')
+const $2 = require('$2')
+const $3 = require('$3')
+const $4 = require('$4')
+const $5 = require('$5')

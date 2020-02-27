@@ -1,7 +1,7 @@
 {
   "name": "snipster",
-  "version": "0.2.1",
-  "description": "A snippets manager for hipsters",
+  "version": "0.3.2",
+  "description": "A snippets manager",
   "main": "index.js",
   "author": "jared hanstra",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "xml2js": "^0.4.17"
   },
   "scripts": {
-    "reset": "cd ~/Users/jh/Library/Application Support/Sublime Text 3/Packages/User"
+    "publish": "npm publish"
   },
   "bin": {
     "snipster": "./index.js"

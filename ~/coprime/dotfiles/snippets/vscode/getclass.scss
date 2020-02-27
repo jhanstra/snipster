@@ -1,0 +1,1 @@
+document.getElementsByClassName('${1:class')

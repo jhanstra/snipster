@@ -1,0 +1,1 @@
+document.getElementsByTagName('${1:tag}');

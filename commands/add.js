@@ -3,10 +3,12 @@ const exec = require('child_process').exec
 const inquirer = require('inquirer')
 const publish = require('./publish')
 const questions = require('../utils/questions')
-const { log, read, write, home, fail } = require('../utils/general')
+const { log, read, write, home, fail, exists } = require('../utils/general')
 const { SNIPSTER_CONFIG } = require('../utils/constants')
 
 const add = async () => {
+  const hasConfig = exists(SNIPSTER_CONFIG)
+  if (!hasConfig) { log('Please run `npx snipster init` first to set up Snipster'); return }
   const settings = await read(SNIPSTER_CONFIG)
   let filename, prefix, lang
   if (process.argv.length > 3) {
@@ -14,7 +16,7 @@ const add = async () => {
   } else {
     log('\n✂️  Add a snippet:')
     const question1 = await inquirer.prompt(questions.add)
-    const filename = `${question1.prefix}.${question1.langs}`
+    filename = `${question1.prefix}.${question1.langs}`
   }
 
   const child = child_process.spawn('vim', [`/tmp/${filename}`], {

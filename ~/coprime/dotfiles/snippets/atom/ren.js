@@ -1,0 +1,5 @@
+render () {
+  return (
+    $1
+  )
+}
