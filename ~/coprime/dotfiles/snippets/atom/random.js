@@ -1,1 +1,0 @@
-${1:array}[Math.floor(Math.random()*${1:array}.length)];

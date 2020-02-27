@@ -1,1 +1,0 @@
-fs.writeFileSync(${1:path}, ${2:data})

@@ -1,1 +1,0 @@
-this.setState({ $1 })

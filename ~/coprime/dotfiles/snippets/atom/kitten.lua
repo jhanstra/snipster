@@ -1,1 +1,0 @@
-http://placekitten.com/g/${1:width}/${2:height}

@@ -1,5 +1,0 @@
-render () {
-  return (
-    $1
-  )
-}

@@ -1,1 +1,0 @@
-const { $1 } = render($2)

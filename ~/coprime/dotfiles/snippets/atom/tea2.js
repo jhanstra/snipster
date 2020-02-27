@@ -1,2 +1,0 @@
-console.log('tea2')
-

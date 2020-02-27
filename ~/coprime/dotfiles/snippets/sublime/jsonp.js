@@ -1,1 +1,0 @@
-JSON.parse($1)
