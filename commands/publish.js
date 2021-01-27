@@ -4,7 +4,7 @@ const jsontoxml = require('jsontoxml')
 const add = require('./add')
 const { atomMatcher, vscodeMatcher, sublimeMatcher } = require('../utils/matchers')
 const { atomComment, vscodeComment, sublimeComment } = require('../utils/comments')
-const { files, home, exists, write, read, log } = require('../utils/general')
+const { files, home, exists, write, read, readRaw, log } = require('../utils/general')
 const { SNIPSTER_CONFIG, ATOM_PATH, VSCODE_PATH, SUBLIME_PATH, STYLE_FILE_PATH, ALL_FILE_PATH } = require('../utils/constants')
 
 const addSnippetsToEditor = async (snippets, editor) => {
@@ -69,7 +69,7 @@ const publish = async () => {
       .toLowerCase().replace('style', STYLE_FILE_PATH)
       .replace('all', ALL_FILE_PATH).split('+')
     const prefix = path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.'))
-    const body = await read(path)
+    const body = await readRaw(path)
 
     // for each language in the extension, add the snippet
     langs.forEach(lang => {

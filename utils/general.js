@@ -86,18 +86,19 @@ const write = (path, contents) => {
   }
 }
 
-const read = async (path, options) => {
+const readRaw = async (path, options) => {
   const readFile = promisify(fs.readFile)
   try {
     const res = await readFile(path, options || 'utf-8')
-    try {
-      const json = JSON.parse(stripJsonComments(res))
-      return json
-    } catch (jsonErr) {}
     return res
   } catch (err) {
     fail(err)
   }
+}
+
+const read = async (path, options) => {
+  const res = await readRaw(path, options)
+  return JSON.parse(stripJsonComments(res))
 }
 
 const copy = (pathFrom, pathTo) => {
@@ -109,6 +110,7 @@ const copy = (pathFrom, pathTo) => {
 
 module.exports = {
   read,
+  readRaw,
   write,
   copy,
   success,
