@@ -31,6 +31,7 @@ snipster
     add()
   })
 
+
 snipster
   .command('sync')
   .description('sync pre-existing snippets to Snipster')

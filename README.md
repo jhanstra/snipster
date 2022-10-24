@@ -17,12 +17,14 @@
 ## Install & Set-up
 
 ```
-npx snipster
+npx snipster init
 -- or --
 yarn global add snipster && snipster
 -- or --
 npm install -g snipster && snipster
 ```
+
+After adding a snippet to your snippets directory, you can run `npx snipster publish` to publish them to your editors.
 
 ## How It Works
 

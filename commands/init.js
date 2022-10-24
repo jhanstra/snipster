@@ -6,6 +6,7 @@ const { success, log, exists, home, write } = require('../utils/general')
 const { LANGUAGES, SNIPSTER_CONFIG } = require('../utils/constants')
 const questions = require('../utils/questions')
 const add = require('./add')
+const publish = require('./publish')
 const sync = require('./sync')
 
 const init = async () => {
@@ -22,15 +23,10 @@ const init = async () => {
   settings.editors.map(editor => { sync(editor) })
 
   write(SNIPSTER_CONFIG, JSON.stringify(settings, null, 2))
-  success('Success!\n')
   log('Check out https://github.com/jhanstra/snipster/examples for snippet ideas and examples.\n')
   log('You can run `snipster add lorem.md` to add a new snippet.\n')
-  const question2 = await inquirer.prompt(questions.addSnippets)
-  if (!question2.addSnippets) {
-    log('Okay, exiting...')
-    return
-  }
-  add()
+  publish()
+  success('All set! You can start using your snippets now :D\n')
 }
 
 module.exports = init
